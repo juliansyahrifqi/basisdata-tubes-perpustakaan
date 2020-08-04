@@ -26,17 +26,24 @@ public class formLoginAnggota extends javax.swing.JFrame {
     }
     
     public void cek_login() {
+        
+        // Koneksi ke database
         Connection kon = Koneksi.koneksiDB();
         
         try {
+            // Mempersiapkan statement
             Statement stmt = kon.createStatement();
             
+            // Query database / sql
             String sql = "SELECT * FROM anggota WHERE username = '"+txtUsername.getText()+"' AND password = '"+txtPassword.getText()+"'";
+            
+            // Eksekusi query ke database
             ResultSet rs = stmt.executeQuery(sql);
             
+            // Jika data ditemukan, lanjutkan ke menu utama anggota
             if(rs.next()) {
-                formUtamaAdmin formAdmin = new formUtamaAdmin();
-                formAdmin.show();
+                formUtamaAnggota formAnggota = new formUtamaAnggota();
+                formAnggota.show();
                 this.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Pasword atau Username Anda Salah!");
@@ -128,7 +135,8 @@ public class formLoginAnggota extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // TODO add your handling code here:
+        // Validasi username dan password
+        // Jika field username dan password masih kosong tampilkan pesan
         if(txtUsername.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Username Wajib Diisi!");
             txtUsername.requestFocus();

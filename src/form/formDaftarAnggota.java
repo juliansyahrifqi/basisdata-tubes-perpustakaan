@@ -26,16 +26,24 @@ public class formDaftarAnggota extends javax.swing.JFrame {
     }
     
     public void daftar_anggota() {
+        
+        // Koneksi ke database
         Connection kon = Koneksi.koneksiDB();
         
         try {
+            
+            // Mempersiapkan Statement
             Statement stmt = kon.createStatement();
             
+            // Query database / sql
             String sql = "INSERT INTO anggota (id_anggota, nama_anggota, no_tlp, alamat, username, password)"
                     + " VALUES (default,'"+txtNama.getText()+"','"+txtNoTlp.getText()+"','"+txtAlamat.getText()+"','"+txtUsername.getText()+"','"+txtPassword.getText()+"');";
             
+            // Eksekusi query ke database
             int baris = stmt.executeUpdate(sql);
             
+            // Jika baris / data bertambah
+            // Lanjutkan ke menu login dan tampilkan pesan berhasil
             if(baris > 0) {
                 JOptionPane.showMessageDialog(null, "Pendaftaran Berhasil! Silahkan Login!");
                 MenuLogin menu = new MenuLogin();
@@ -171,7 +179,8 @@ public class formDaftarAnggota extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDaftarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDaftarActionPerformed
-        // TODO add your handling code here:
+        // Semua field harus diisi
+        // Jika ada yang belum, tampilkan pesan dan login tidak diproses
         if(txtNama.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Nama Wajib Diisi!");
             txtNama.requestFocus();

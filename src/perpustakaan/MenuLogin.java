@@ -104,21 +104,21 @@ public class MenuLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginAdminActionPerformed
-        // TODO add your handling code here:
+        // Jika menu login admin dipilih / diklik lanjutkan ke menu login admin
         formLoginAdmin loginAdmin = new formLoginAdmin();
         loginAdmin.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnLoginAdminActionPerformed
 
     private void btnLoginAnggotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginAnggotaActionPerformed
-        // TODO add your handling code here:
+        // Jika menu login anggota dipilih / diklik lanjutkan ke menu login anggota
         formLoginAnggota loginAnggota = new formLoginAnggota();
         loginAnggota.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnLoginAnggotaActionPerformed
 
     private void btnDaftarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDaftarActionPerformed
-        // TODO add your handling code here:
+        // Jika menu daftar anggota dipilih / diklik lanjutkan ke menu daftar anggota
         formDaftarAnggota daftarAnggota = new formDaftarAnggota();
         daftarAnggota.setVisible(true);
         this.dispose();

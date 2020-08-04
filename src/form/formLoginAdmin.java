@@ -21,34 +21,58 @@ public class formLoginAdmin extends javax.swing.JFrame {
     /**
      * Creates new form formLoginAdmin
      */
+    static int idAdmin;
+    static String namaAdmin;
+    
     public formLoginAdmin() {
         initComponents();
     }
     
     public void cek_login() {
+        // Koneksi ke database
         Connection kon = Koneksi.koneksiDB();
         
         try {
+            // Mempersiapkan statement
             Statement stmt = kon.createStatement();
             
+            // Query database / sql
             String sql = "SELECT * FROM admin WHERE username = '"+txtUsername.getText()+"' AND password = '"+txtPassword.getText()+"'";
+           
+            // Eksekusi query ke database
             ResultSet rs = stmt.executeQuery(sql);
             
+            // Jika data admin ditemukan atau username dan password benar 
+            // lanjutkan ke menu utama admin
             if(rs.next()) {
+                idAdmin = rs.getInt("id_admin");
+                namaAdmin = rs.getString("nama_admin");
                 formUtamaAdmin formAdmin = new formUtamaAdmin();
                 formAdmin.show();
                 this.dispose();
             } else {
+                // Jika data admin tidak ditemukan atau username dan password salah
+                // Tampilkan pesan
+        
                 JOptionPane.showMessageDialog(null, "Pasword atau Username Anda Salah!");
                 txtUsername.setText("");
                 txtPassword.setText("");
                 txtUsername.requestFocus();
             }
         } catch(SQLException e) {
-            JOptionPane.showConfirmDialog(null, "Error: "+e);
+            JOptionPane.showMessageDialog(null, "Error: "+e);
         } catch(Exception er) {
             JOptionPane.showMessageDialog(null, er);
         }
+    }
+    
+    // Method login session dengan mengambil id_admin
+    public static int getId() {
+        return idAdmin;
+    }
+    
+    public static String getNama() {
+        return namaAdmin;
     }
 
     /**
@@ -128,7 +152,8 @@ public class formLoginAdmin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // TODO add your handling code here:
+        // Validasi username dan password
+        // Jika kosong maka tidak bisa login
         if(txtUsername.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Username Wajib Diisi!");
             txtUsername.requestFocus();

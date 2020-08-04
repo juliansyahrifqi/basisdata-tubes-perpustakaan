@@ -5,6 +5,7 @@
  */
 package perpustakaan;
 
+import com.mysql.jdbc.CommunicationsException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import javax.swing.JOptionPane;
@@ -23,9 +24,8 @@ public class Koneksi {
             Connection koneksi = DriverManager.getConnection("jdbc:mysql://localhost/db10118322Perpustakaan", "root", "");
             return koneksi;
         } catch(Exception e) {
-            JOptionPane.showMessageDialog(null, "Error :" + e);
+            JOptionPane.showMessageDialog(null, "Gagal Koneksi Ke Database");
             return null;
         }
-    }
-    
+    } 
 }
