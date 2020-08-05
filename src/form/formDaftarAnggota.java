@@ -6,6 +6,7 @@
 package form;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
@@ -25,6 +26,37 @@ public class formDaftarAnggota extends javax.swing.JFrame {
         initComponents();
     }
     
+    private boolean cek_username(String x) {
+        // Koneksi ke database
+        Connection kon = Koneksi.koneksiDB();
+        
+        // Set username false
+        boolean username = false;
+        
+        try {
+            
+            // Mempersiapkan statement
+            Statement stmt = kon.createStatement();
+            
+            // Query sql
+            String sql = "SELECT username FROM anggota WHERE username = '"+x+"'";
+            
+            // Eksekusi Query ke database
+            ResultSet rs = stmt.executeQuery(sql);
+            
+            // Jika query / username ditemukan
+            // Set username ke true ( username sudah ada )
+            if(rs.next()) {
+                username = true;
+            }
+        }catch(Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        
+        // Kembalikan nilai username
+        return username;
+    }
+    
     public void daftar_anggota() {
         
         // Koneksi ke database
@@ -36,8 +68,14 @@ public class formDaftarAnggota extends javax.swing.JFrame {
             Statement stmt = kon.createStatement();
             
             // Query database / sql
-            String sql = "INSERT INTO anggota (id_anggota, nama_anggota, no_tlp, alamat, username, password)"
-                    + " VALUES (default,'"+txtNama.getText()+"','"+txtNoTlp.getText()+"','"+txtAlamat.getText()+"','"+txtUsername.getText()+"','"+txtPassword.getText()+"');";
+            String sql = "INSERT INTO anggota (id_anggota, nama_anggota, no_tlp, alamat, username, password, status)"
+                    + " VALUES (default,"
+                    + "'"+txtNama.getText()
+                    +"','"+txtNoTlp.getText()
+                    +"','"+txtAlamat.getText()
+                    +"','"+txtUsername.getText()
+                    +"','"+txtPassword.getText()
+                    +"', 'AKTIF');";
             
             // Eksekusi query ke database
             int baris = stmt.executeUpdate(sql);
@@ -55,6 +93,36 @@ public class formDaftarAnggota extends javax.swing.JFrame {
         } catch(SQLException e) {
             JOptionPane.showMessageDialog(null, "Error: "+e);
         }
+    }
+    
+    // Method untuk cek validasi field harus semua diisi
+    // Method untuk cek username apakah sudah digunakan atau belum
+    private boolean cek_validasi() {
+        boolean validasi = false;
+        
+        if(txtNama.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Nama Wajib Diisi!");
+            txtNama.requestFocus();
+        } else if(txtNoTlp.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No Telepon Wajib Diisi!");
+            txtNoTlp.requestFocus();
+        } else if(txtAlamat.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Alamat Wajib Diisi!");
+            txtAlamat.requestFocus();
+        } else if(txtUsername.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Username Wajib Diisi!");
+            txtUsername.requestFocus();
+        } else if(txtPassword.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Password Wajib Diisi!");
+            txtPassword.requestFocus();
+        } else if(cek_username(txtUsername.getText())) {
+            JOptionPane.showMessageDialog(null, "Username sudah digunakan!");
+            txtUsername.requestFocus();
+        } else {
+            validasi = true;
+        }
+           
+        return validasi;
     }
 
     /**
@@ -179,30 +247,18 @@ public class formDaftarAnggota extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDaftarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDaftarActionPerformed
-        // Semua field harus diisi
-        // Jika ada yang belum, tampilkan pesan dan login tidak diproses
-        if(txtNama.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Nama Wajib Diisi!");
-            txtNama.requestFocus();
-        } else if(txtNoTlp.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "No Telepon Wajib Diisi!");
-            txtNoTlp.requestFocus();
-        } else if(txtAlamat.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Alamat Wajib Diisi!");
-            txtAlamat.requestFocus();
-        } else if(txtUsername.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Username Wajib Diisi!");
-            txtUsername.requestFocus();
-        } else if(txtPassword.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Password Wajib Diisi!");
-            txtPassword.requestFocus();
-        } else {
+        // Cek validasi apakah semua field sudah diisi
+        // Cek username apakah sudah digunakan
+        // Username harus unik
+        
+        if(cek_validasi()) {
             daftar_anggota();
-        }    
+        }
     }//GEN-LAST:event_btnDaftarActionPerformed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
-        // TODO add your handling code here:
+        // Reset semua field
+        
         txtNama.setText("");
         txtNoTlp.setText("");
         txtAlamat.setText("");

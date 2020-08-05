@@ -24,8 +24,10 @@ import perpustakaan.MenuLogin;
  */
 public class formKelolaBuku extends javax.swing.JInternalFrame {
     
+    // Format tanggal
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
     Date date = new Date();
+    
     /**
      * Creates new form formKelolaBuku
      */
@@ -33,35 +35,50 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
         initComponents();
         load_data();
         
+        // Set tanggal sekarang
         txtTanggal.setText(dateFormat.format(date));
+        
+        // Set id admin sesuai dengan yang login
         txtIdAdmin.setText(Integer.toString(formLoginAdmin.getId()));
         txtNamaAdmin.setText(formLoginAdmin.getNama());
+        
+        // Tanggal, id admin dan nama admin tidak bisa diedit
         txtTanggal.setEditable(false);
         txtIdAdmin.setEditable(false);
         txtNamaAdmin.setEditable(false);
         
+        // Edit dan Hapus data tidak bisa sebelum memilih data yang akan dihapus
         btnEdit.setEnabled(false);
         btnHapus.setEnabled(false);
 
     }
     
     private void load_data() {
-        Connection kon = Koneksi.koneksiDB();
-        Object tableHeader[] = {"ID BUKU", "JUDUL BUKU", "PENERBIT", "PENULIS", "DESKRIPSI", "TAHUN TERBIT", "TANGGAL DITAMBAHKAN", "DITAMBAHKAN"};
         
+        // Koneksi ke database
+        Connection kon = Koneksi.koneksiDB();
+        
+        // Nama header tabel
+        Object tableHeader[] = {"ID BUKU", "JUDUL BUKU", "PENERBIT", "PENULIS", "DESKRIPSI", "TAHUN TERBIT", "TANGGAL DITAMBAHKAN", "DITAMBAHKAN"};
         DefaultTableModel data = new DefaultTableModel(null, tableHeader);
         
+        // Tambahkan data ke tabel Buku
         tblBuku.setModel(data);
             
         try {
+            // Mempersiapkan statement
             Statement stmt = kon.createStatement();
             
+            // Query sql
             String sql = "SELECT id_buku, judul_buku, penerbit, penulis, deskripsi, tahun_terbit, date_created, nama_admin "
                     + " FROM buku "
-                    + " INNER JOIN admin ON buku.id_admin = admin.id_admin";
+                    + " INNER JOIN admin ON buku.id_admin = admin.id_admin"
+                    + " WHERE status = 'ADA'";
             
+            // Eksekusi query ke database
             ResultSet rs = stmt.executeQuery(sql);
             
+            // Selama hasil ada ( true )
             while(rs.next()) {
                 String id_admin = rs.getString(1);
                 String judul_buku = rs.getString(2);
@@ -72,6 +89,7 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
                 String date_created = rs.getString(7);
                 String nama_admin = rs.getString(8);
                 
+                // Tambahkan data dari database ke tabel
                 String d[] = {id_admin, judul_buku, penerbit, penulis, deskripsi, tahun_terbit, date_created, nama_admin};
                 data.addRow(d);
             }
@@ -85,11 +103,14 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
     }
     
     private void tambah_data() {
-        
+        // Koneksi ke database
         Connection kon = Koneksi.koneksiDB();
+        
         try {    
+            // Mempersiapkan statement
             Statement stmt = kon.createStatement();
             
+            // Query sql
             String sql = "INSERT INTO buku"
                     + " VALUES (default,'"+txtJudulBuku.getText()
                     +"','"+txtPenerbit.getText()
@@ -98,12 +119,13 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
                     +"','"+cbTahun.getSelectedItem()
                     +"','"+txtTanggal.getText()
                     +"','"+txtIdAdmin.getText()
-                    +"');";
+                    +"', 'ADA');";
             
+            // Eksekusi ke database
             int baris = stmt.executeUpdate(sql);
             
             // Jika baris / data bertambah
-            // Lanjutkan ke menu login dan tampilkan pesan berhasil
+            // Tampilkan data terbaru
             if(baris > 0) {
                 JOptionPane.showMessageDialog(null, "Tambah Data Berhasil!");
                 load_data();
@@ -119,11 +141,15 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
     }
     
     private void edit_data() {
+        
+        // Koneksi ke database
         Connection kon = Koneksi.koneksiDB();
         
         try {
+            // Mempersiapkan statement
             Statement stmt = kon.createStatement();
             
+            // Query sql
             String sql = "UPDATE buku SET judul_buku = '"+txtJudulBuku.getText()
                     +"', penerbit = '"+txtPenerbit.getText()
                     +"', penulis = '"+txtPenulis.getText()
@@ -131,10 +157,14 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
                     +"', tahun_terbit = '"+cbTahun.getSelectedItem()
                     +"', date_created = '"+txtTanggal.getText()
                     +"', id_admin = '"+txtIdAdmin.getText()
-                    +"' WHERE id_buku = '"+tblBuku.getValueAt(tblBuku.getSelectedRow(), 0).toString()+"'";
+                    +"', status = 'ADA' "
+                    + "WHERE id_buku = '"+tblBuku.getValueAt(tblBuku.getSelectedRow(), 0).toString()+"'";
             
+            // Eksekusi query ke database
             int baris = stmt.executeUpdate(sql);
             
+            // Jika data berpengaruh
+            // Tampilkan pesan berhasil
             if(baris>0) {
                 JOptionPane.showMessageDialog(null, "Data Buku Berhasil Diupdate!");
             } else {
@@ -146,16 +176,23 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
     }
     
     private void hapus_data() {
+        
+        // Koneksi ke database
         Connection kon = Koneksi.koneksiDB();
         
         try {
             
+            // Mempersiapkan statement
             Statement stmt = kon.createStatement();
             
-            String sql = "DELETE FROM buku WHERE id_buku = '"+tblBuku.getValueAt(tblBuku.getSelectedRow(), 0).toString()+"'";
+            // Query sql
+            String sql = "UPDATE buku SET status = 'DIHAPUS' WHERE id_buku = '"+tblBuku.getValueAt(tblBuku.getSelectedRow(), 0).toString()+"'";
             
+            // Eksekusi query ke database
             int baris = stmt.executeUpdate(sql);
             
+            // Jika database berpengaruh
+            // Tampilkan pesan berhasil
             if(baris > 0) {
                 JOptionPane.showMessageDialog(null, "Data Berhasil Dihapus!");
             } else {
@@ -169,6 +206,8 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
     }
     
     private void clear_data() {
+        // Unset semua field
+        
         txtJudulBuku.setText("");
         txtPenerbit.setText("");
         txtPenulis.setText("");
@@ -178,26 +217,57 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
     
     private int getId(String x) {
         
+        // Koneksi ke database
         Connection kon = Koneksi.koneksiDB();
         
+        // Set id_admin 0
         int id_admin = 0;
         
         try {
+            
+            // Membuat statement
             Statement stmt = kon.createStatement();
       
+            // Query sql
             String sql = "SELECT id_admin FROM admin WHERE nama_admin='"+x+"'";
             
+            // Eksekusi query ke database
             ResultSet rs = stmt.executeQuery(sql);
             
+            // Mendapatkan hasil dari query
             rs.next();
    
+            // Id admin diset dengan hasil dari query
             id_admin = rs.getInt("id_admin");
            
         } catch(Exception e) {
-            
+            JOptionPane.showMessageDialog(null, e);
         }
         
+        // Kembalikan nilai id_admin
         return id_admin;
+    }
+    
+    private boolean cek_validasi() {
+        boolean validasi = false;
+        
+        if(txtJudulBuku.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Judul Buku wajib diisi!");
+            txtJudulBuku.requestFocus();
+        } else if(txtPenerbit.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Penerbit Buku wajib diisi!");
+            txtPenerbit.requestFocus();
+        } else if(txtPenulis.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Penulis harus diisi!");
+            txtPenulis.requestFocus();
+        } else if(txtDeskripsi.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Deskripsi buku wajib diisi!");
+            txtDeskripsi.requestFocus();
+        } else {
+            validasi = true;
+        }
+           
+        return validasi;
     }
 
     /**
@@ -415,9 +485,12 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
 
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
         // TODO add your handling code here:
-        tambah_data();
-        load_data();
-        clear_data();
+        if(cek_validasi()) {
+            tambah_data();
+            load_data();
+            clear_data();
+        }
+        
     }//GEN-LAST:event_btnTambahActionPerformed
 
     private void btnKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembaliActionPerformed
@@ -426,10 +499,11 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnKembaliActionPerformed
 
     private void tblBukuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBukuMouseClicked
-        // TODO add your handling code here:
+
+        // Mendapatkan baris yang dipilih 
         int baris = tblBuku.getSelectedRow();
         
-        
+        // Set variabel yang diambil dari baris tabel yang diklik
         String judul_buku = tblBuku.getValueAt(baris, 1).toString();
         String penerbit = tblBuku.getValueAt(baris, 2).toString();
         String penulis = tblBuku.getValueAt(baris, 3).toString();
@@ -438,7 +512,7 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
         String date_created = tblBuku.getValueAt(baris, 6).toString();
         String nama_admin = tblBuku.getValueAt(baris, 7).toString();
         
-        
+        // Mengisi field pada form dengan data tabel yang dipilih
         txtJudulBuku.setText(judul_buku);
         txtPenerbit.setText(penerbit);
         txtPenulis.setText(penulis);
@@ -448,28 +522,33 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
         txtIdAdmin.setText(Integer.toString(getId(nama_admin)));
         txtNamaAdmin.setText(nama_admin);
        
-        
+        // Tombol tambah data dimatikan
         btnTambah.setEnabled(false);
         btnEdit.setEnabled(true);
         btnHapus.setEnabled(true);
     }//GEN-LAST:event_tblBukuMouseClicked
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        // TODO add your handling code here:
-        edit_data();
-        load_data();
-        clear_data();
-
+        // Jika field sudah disii semua
+        if(cek_validasi()) {
+            edit_data();
+            load_data();
+            clear_data();
+        }
+        
+        // Tombol tambah dinyalakan
         btnTambah.setEnabled(true);
         btnEdit.setEnabled(false);
         btnHapus.setEnabled(false);
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
-        // TODO add your handling code here:
-        hapus_data();
-        load_data();
-        clear_data();
+        // Jika field data sudah diisi semua
+        if(cek_validasi()) {
+            hapus_data();
+            load_data();
+            clear_data();
+        } 
     }//GEN-LAST:event_btnHapusActionPerformed
 
 
