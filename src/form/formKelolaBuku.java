@@ -495,7 +495,11 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
 
     private void btnKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembaliActionPerformed
         // TODO add your handling code here: 
-        this.setVisible(false);
+        this.dispose();
+        formUtamaAdmin utamaAdmin = new formUtamaAdmin();
+        
+        utamaAdmin.dispose();
+        
     }//GEN-LAST:event_btnKembaliActionPerformed
 
     private void tblBukuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBukuMouseClicked

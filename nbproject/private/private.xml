@@ -4,11 +4,8 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/oyeaaa/NetBeansProjects/Blog/Perpustakaan/src/form/formUtamaAdmin.java</file>
-            <file>file:/home/oyeaaa/NetBeansProjects/Blog/Perpustakaan/src/form/formLoginAdmin.java</file>
-            <file>file:/home/oyeaaa/NetBeansProjects/Blog/Perpustakaan/src/form/formDaftarAnggota.java</file>
-            <file>file:/home/oyeaaa/NetBeansProjects/Blog/Perpustakaan/src/perpustakaan/MenuLogin.java</file>
             <file>file:/home/oyeaaa/NetBeansProjects/Blog/Perpustakaan/src/form/formKelolaBuku.java</file>
-            <file>file:/home/oyeaaa/NetBeansProjects/Blog/Perpustakaan/src/perpustakaan/Koneksi.java</file>
+            <file>file:/home/oyeaaa/NetBeansProjects/Blog/Perpustakaan/src/form/formKelolaAnggota.java</file>
         </group>
     </open-files>
 </project-private>
