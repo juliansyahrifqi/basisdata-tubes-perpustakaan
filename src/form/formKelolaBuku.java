@@ -10,13 +10,10 @@ import java.util.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import perpustakaan.Koneksi;
-import perpustakaan.MenuLogin;
 
 /**
  *
@@ -50,7 +47,7 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
         // Edit dan Hapus data tidak bisa sebelum memilih data yang akan dihapus
         btnEdit.setEnabled(false);
         btnHapus.setEnabled(false);
-
+        
     }
     
     private void load_data() {
@@ -59,7 +56,7 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
         Connection kon = Koneksi.koneksiDB();
         
         // Nama header tabel
-        Object tableHeader[] = {"ID BUKU", "JUDUL BUKU", "PENERBIT", "PENULIS", "DESKRIPSI", "TAHUN TERBIT", "TANGGAL DITAMBAHKAN", "DITAMBAHKAN"};
+        Object tableHeader[] = {"ID BUKU", "JUDUL BUKU", "PENERBIT", "PENULIS", "DESKRIPSI", "TAHUN TERBIT", "TANGGAL DITAMBAHKAN", "DITAMBAHKAN", "STATUS"};
         DefaultTableModel data = new DefaultTableModel(null, tableHeader);
         
         // Tambahkan data ke tabel Buku
@@ -70,11 +67,11 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
             Statement stmt = kon.createStatement();
             
             // Query sql
-            String sql = "SELECT id_buku, judul_buku, penerbit, penulis, deskripsi, tahun_terbit, date_created, nama_admin "
+            String sql = "SELECT id_buku, judul_buku, penerbit, penulis, deskripsi, tahun_terbit, date_created, nama_admin, status "
                     + " FROM buku "
                     + " INNER JOIN admin ON buku.id_admin = admin.id_admin"
-                    + " WHERE status = 'ADA'";
-            
+                    + " ORDER BY id_buku";
+                    
             // Eksekusi query ke database
             ResultSet rs = stmt.executeQuery(sql);
             
@@ -88,9 +85,10 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
                 String tahun_terbit = rs.getString(6);
                 String date_created = rs.getString(7);
                 String nama_admin = rs.getString(8);
+                String status = rs.getString(9);
                 
                 // Tambahkan data dari database ke tabel
-                String d[] = {id_admin, judul_buku, penerbit, penulis, deskripsi, tahun_terbit, date_created, nama_admin};
+                String d[] = {id_admin, judul_buku, penerbit, penulis, deskripsi, tahun_terbit, date_created, nama_admin, status};
                 data.addRow(d);
             }
             
@@ -100,6 +98,112 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
             utamaAdmin.setVisible(true);
             this.dispose();
         }
+    }
+    
+    private void load_data_status(String x) {
+        // Koneksi ke database
+        Connection kon = Koneksi.koneksiDB();
+        
+        // Nama header tabel
+        Object tableHeader[] = {"ID BUKU", "JUDUL BUKU", "PENERBIT", "PENULIS", "DESKRIPSI", "TAHUN TERBIT", "TANGGAL DITAMBAHKAN", "DITAMBAHKAN", "STATUS"};
+        DefaultTableModel data = new DefaultTableModel(null, tableHeader);
+        
+        // Tambahkan data ke tabel Buku
+        tblBuku.setModel(data);
+            
+        try {
+            // Mempersiapkan statement
+            Statement stmt = kon.createStatement();
+            
+            // Query sql
+            String sql = "SELECT id_buku, judul_buku, penerbit, penulis, deskripsi, tahun_terbit, date_created, nama_admin, status "
+                    + " FROM buku "
+                    + " INNER JOIN admin ON buku.id_admin = admin.id_admin"
+                    + " WHERE status = '"+x+"'"
+                    + " ORDER BY id_buku";
+                    
+            // Eksekusi query ke database
+            ResultSet rs = stmt.executeQuery(sql);
+            
+            // Selama hasil ada ( true )
+            while(rs.next()) {
+                String id_admin = rs.getString(1);
+                String judul_buku = rs.getString(2);
+                String penerbit = rs.getString(3);
+                String penulis = rs.getString(4);
+                String deskripsi = rs.getString(5);
+                String tahun_terbit = rs.getString(6);
+                String date_created = rs.getString(7);
+                String nama_admin = rs.getString(8);
+                String status = rs.getString(9);
+                
+                // Tambahkan data dari database ke tabel
+                String d[] = {id_admin, judul_buku, penerbit, penulis, deskripsi, tahun_terbit, date_created, nama_admin, status};
+                data.addRow(d);
+            } 
+            
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: "+e);
+            formUtamaAdmin utamaAdmin = new formUtamaAdmin();
+            utamaAdmin.setVisible(true);
+            this.dispose();
+        }
+    }
+    
+    private void load_data_cari() {
+        
+       // Koneksi ke database
+       Connection kon = Koneksi.koneksiDB();
+
+       // Nama header tabel
+       Object tableHeader[] = {"ID BUKU", "JUDUL BUKU", "PENERBIT", "PENULIS", "DESKRIPSI", "TAHUN TERBIT", "TANGGAL DITAMBAHKAN", "DITAMBAHKAN", "STATUS"};
+       DefaultTableModel data = new DefaultTableModel(null, tableHeader);
+
+       // Tambahkan data ke tabel Buku
+       tblBuku.setModel(data);
+
+       try {
+           // Mempersiapkan statement
+           Statement stmt = kon.createStatement();
+
+           // Query sql
+           String sql = "SELECT id_buku, judul_buku, penerbit, penulis, deskripsi, tahun_terbit, date_created, nama_admin, status "
+                   + " FROM buku "
+                   + " INNER JOIN admin ON buku.id_admin = admin.id_admin"
+                   + " WHERE judul_buku LIKE '%"+txtCari.getText()+"%'"
+                   + " ORDER BY id_buku";
+
+           // Eksekusi query ke database
+           ResultSet rs = stmt.executeQuery(sql);
+
+           // Selama hasil ada ( true )
+           while(rs.next()) {
+               String id_admin = rs.getString(1);
+               String judul_buku = rs.getString(2);
+               String penerbit = rs.getString(3);
+               String penulis = rs.getString(4);
+               String deskripsi = rs.getString(5);
+               String tahun_terbit = rs.getString(6);
+               String date_created = rs.getString(7);
+               String nama_admin = rs.getString(8);
+               String status = rs.getString(9);
+
+               // Tambahkan data dari database ke tabel
+               String d[] = {id_admin, judul_buku, penerbit, penulis, deskripsi, tahun_terbit, date_created, nama_admin, status};
+               data.addRow(d);
+           } 
+           
+           ResultSet rs2 = stmt.executeQuery(sql);
+           
+           if(!rs2.next()) {
+               JOptionPane.showMessageDialog(null, "Data tidak ditemukan!");
+               load_data();
+           }
+       } catch(Exception e) {
+           JOptionPane.showMessageDialog(null, e);
+           load_data();
+       }
+
     }
     
     private void tambah_data() {
@@ -192,7 +296,7 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
             int baris = stmt.executeUpdate(sql);
             
             // Jika database berpengaruh
-            // Tampilkan pesan berhasil
+            // Tampilkan pesan berhasil dan sebaliknya
             if(baris > 0) {
                 JOptionPane.showMessageDialog(null, "Data Berhasil Dihapus!");
             } else {
@@ -206,8 +310,8 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
     }
     
     private void clear_data() {
-        // Unset semua field
         
+        // Unset semua field
         txtJudulBuku.setText("");
         txtPenerbit.setText("");
         txtPenulis.setText("");
@@ -220,7 +324,7 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
         // Koneksi ke database
         Connection kon = Koneksi.koneksiDB();
         
-        // Set id_admin 0
+        // Set id_admin = 0
         int id_admin = 0;
         
         try {
@@ -235,11 +339,11 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
             ResultSet rs = stmt.executeQuery(sql);
             
             // Mendapatkan hasil dari query
-            rs.next();
-   
-            // Id admin diset dengan hasil dari query
-            id_admin = rs.getInt("id_admin");
-           
+            // Id admin diisi dari hasil query
+            while(rs.next()) {
+                id_admin = rs.getInt("id_admin");
+            }
+                    
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -249,8 +353,11 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
     }
     
     private boolean cek_validasi() {
+        
+        // Set nilai validasi = false
         boolean validasi = false;
         
+        // Jika semua field belum diisi, tampilkan pesan
         if(txtJudulBuku.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Judul Buku wajib diisi!");
             txtJudulBuku.requestFocus();
@@ -264,12 +371,15 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Deskripsi buku wajib diisi!");
             txtDeskripsi.requestFocus();
         } else {
+            
+            // Jika semua field sudah diisi set validasi menjadi true
             validasi = true;
         }
            
+        // Kembalikan nilai validasi
         return validasi;
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -302,6 +412,12 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
         txtNamaAdmin = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblBuku = new javax.swing.JTable();
+        txtCari = new javax.swing.JTextField();
+        btnCari = new javax.swing.JButton();
+        btnSemua = new javax.swing.JButton();
+        btnAda = new javax.swing.JButton();
+        btnDihapus = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setMinimumSize(new java.awt.Dimension(1366, 632));
         setPreferredSize(new java.awt.Dimension(1366, 632));
@@ -385,6 +501,41 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(tblBuku);
 
+        txtCari.setText("Cari Nama Buku disini");
+        txtCari.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtCariMouseClicked(evt);
+            }
+        });
+
+        btnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/search-icon.png"))); // NOI18N
+        btnCari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCariActionPerformed(evt);
+            }
+        });
+
+        btnSemua.setText("SEMUA");
+        btnSemua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSemuaActionPerformed(evt);
+            }
+        });
+
+        btnAda.setText("ADA");
+        btnAda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdaActionPerformed(evt);
+            }
+        });
+
+        btnDihapus.setText("DIHAPUS");
+        btnDihapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDihapusActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -427,8 +578,21 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(42, 42, 42)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 789, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnSemua)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnAda)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnDihapus)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnCari, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 789, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -438,7 +602,21 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnCari, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnSemua, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnAda, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnDihapus, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(txtJudulBuku, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -468,15 +646,13 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(txtIdAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(txtNamaAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnKembali, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE))
                 .addGap(22, 22, 22))
         );
 
@@ -484,7 +660,7 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
-        // TODO add your handling code here:
+        // Jika semua field sudah diisi
         if(cek_validasi()) {
             tambah_data();
             load_data();
@@ -494,12 +670,8 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnTambahActionPerformed
 
     private void btnKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembaliActionPerformed
-        // TODO add your handling code here: 
+        // Hapus jinternalframe dan kembali ke menu utama admin
         this.dispose();
-        formUtamaAdmin utamaAdmin = new formUtamaAdmin();
-        
-        utamaAdmin.dispose();
-        
     }//GEN-LAST:event_btnKembaliActionPerformed
 
     private void tblBukuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBukuMouseClicked
@@ -547,21 +719,58 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
-        // Jika field data sudah diisi semua
-        if(cek_validasi()) {
-            hapus_data();
-            load_data();
-            clear_data();
-        } 
+        int hapus = JOptionPane.showOptionDialog(this, 
+                "Apakah anda yakin untuk menghapus data ini ?", null, JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null, null, null);
+        
+        if(hapus == JOptionPane.YES_OPTION) {
+            if(cek_validasi()) {
+                hapus_data();
+                load_data();
+                clear_data();
+                btnHapus.setEnabled(false);
+            }
+        }
     }//GEN-LAST:event_btnHapusActionPerformed
+
+    private void txtCariMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCariMouseClicked
+        
+        txtCari.setText("");
+    }//GEN-LAST:event_txtCariMouseClicked
+
+    private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
+        // Load data ke tabel berdasarkan pencarian
+        load_data_cari();
+    }//GEN-LAST:event_btnCariActionPerformed
+
+    private void btnSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSemuaActionPerformed
+        // Load data tabel sesuai dengan filter ( semua )
+        load_data();
+    }//GEN-LAST:event_btnSemuaActionPerformed
+
+    private void btnAdaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdaActionPerformed
+        
+        // Load data tabel sesuai dengan filter ( status = ada )
+        load_data_status("ADA");
+    }//GEN-LAST:event_btnAdaActionPerformed
+
+    private void btnDihapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDihapusActionPerformed
+        // Load data tabel sesuai dengan filter ( dihapus )
+        load_data_status("DIHAPUS");
+    }//GEN-LAST:event_btnDihapusActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAda;
+    private javax.swing.JButton btnCari;
+    private javax.swing.JButton btnDihapus;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnHapus;
     private javax.swing.JButton btnKembali;
+    private javax.swing.JButton btnSemua;
     private javax.swing.JButton btnTambah;
     private javax.swing.JComboBox<String> cbTahun;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -573,6 +782,7 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tblBuku;
+    private javax.swing.JTextField txtCari;
     private javax.swing.JTextArea txtDeskripsi;
     private javax.swing.JTextField txtIdAdmin;
     private javax.swing.JTextField txtJudulBuku;
