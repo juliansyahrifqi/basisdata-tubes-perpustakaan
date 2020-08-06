@@ -19,11 +19,16 @@ import perpustakaan.MenuLogin;
  */
 public class formLoginAnggota extends javax.swing.JFrame {
 
+    static int idAnggota;
+    static String namaAnggota;
+    static String status;
     /**
      * Creates new form formLoginAnggota
      */
     public formLoginAnggota() {
         initComponents();
+        
+        txtUsername.requestFocus();
     }
     
     public void cek_login() {
@@ -36,17 +41,31 @@ public class formLoginAnggota extends javax.swing.JFrame {
             Statement stmt = kon.createStatement();
             
             // Query database / sql
-            String sql = "SELECT * FROM anggota WHERE username = '"+txtUsername.getText()+"' AND password = '"+txtPassword.getText()+"'";
+            String sql = "SELECT * FROM anggota "
+                    + "WHERE username = '"+txtUsername.getText()
+                    +"' AND password = '"+txtPassword.getText()+"'";
             
             // Eksekusi query ke database
             ResultSet rs = stmt.executeQuery(sql);
             
-            // Jika data ditemukan, lanjutkan ke menu utama anggota
+            // Jika data ditemukan, lanjutkan ke menu utama anggota dan statusnya aktif
             if(rs.next()) {
-                formUtamaAnggota formAnggota = new formUtamaAnggota();
-                formAnggota.show();
-                this.dispose();
-            } else {
+                idAnggota = rs.getInt("id_anggota");
+                namaAnggota = rs.getString("nama_anggota");
+                status = rs.getString("status");
+                
+                if(status.equals("TIDAK AKTIF")) {
+                    JOptionPane.showMessageDialog(null, "Akun anda sudah tidak aktif!");
+                    txtUsername.setText("");
+                    txtPassword.setText("");
+                    
+                    txtUsername.requestFocus();
+                } else {
+                    formUtamaAnggota formAnggota = new formUtamaAnggota();
+                    formAnggota.show();
+                    this.dispose();
+                } 
+            } else {   
                 JOptionPane.showMessageDialog(null, "Pasword atau Username Anda Salah!");
                 txtUsername.setText("");
                 txtPassword.setText("");
@@ -57,6 +76,14 @@ public class formLoginAnggota extends javax.swing.JFrame {
         } catch(Exception er) {
             JOptionPane.showMessageDialog(null, er);
         }
+    }
+    
+   public static int getId() {
+        return idAnggota;
+    }
+    
+    public static String getNama() {
+        return namaAnggota;
     }
 
     /**

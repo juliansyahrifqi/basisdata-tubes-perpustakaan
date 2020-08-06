@@ -77,7 +77,7 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
             
             // Selama hasil ada ( true )
             while(rs.next()) {
-                String id_admin = rs.getString(1);
+                String id_buku = rs.getString(1);
                 String judul_buku = rs.getString(2);
                 String penerbit = rs.getString(3);
                 String penulis = rs.getString(4);
@@ -88,7 +88,7 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
                 String status = rs.getString(9);
                 
                 // Tambahkan data dari database ke tabel
-                String d[] = {id_admin, judul_buku, penerbit, penulis, deskripsi, tahun_terbit, date_created, nama_admin, status};
+                String d[] = {id_buku, judul_buku, penerbit, penulis, deskripsi, tahun_terbit, date_created, nama_admin, status};
                 data.addRow(d);
             }
             
@@ -127,7 +127,7 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
             
             // Selama hasil ada ( true )
             while(rs.next()) {
-                String id_admin = rs.getString(1);
+                String id_buku = rs.getString(1);
                 String judul_buku = rs.getString(2);
                 String penerbit = rs.getString(3);
                 String penulis = rs.getString(4);
@@ -138,7 +138,7 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
                 String status = rs.getString(9);
                 
                 // Tambahkan data dari database ke tabel
-                String d[] = {id_admin, judul_buku, penerbit, penulis, deskripsi, tahun_terbit, date_created, nama_admin, status};
+                String d[] = {id_buku, judul_buku, penerbit, penulis, deskripsi, tahun_terbit, date_created, nama_admin, status};
                 data.addRow(d);
             } 
             
@@ -178,7 +178,7 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
 
            // Selama hasil ada ( true )
            while(rs.next()) {
-               String id_admin = rs.getString(1);
+               String id_buku = rs.getString(1);
                String judul_buku = rs.getString(2);
                String penerbit = rs.getString(3);
                String penulis = rs.getString(4);
@@ -189,7 +189,7 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
                String status = rs.getString(9);
 
                // Tambahkan data dari database ke tabel
-               String d[] = {id_admin, judul_buku, penerbit, penulis, deskripsi, tahun_terbit, date_created, nama_admin, status};
+               String d[] = {id_buku, judul_buku, penerbit, penulis, deskripsi, tahun_terbit, date_created, nama_admin, status};
                data.addRow(d);
            } 
            
@@ -665,8 +665,7 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
             tambah_data();
             load_data();
             clear_data();
-        }
-        
+        }     
     }//GEN-LAST:event_btnTambahActionPerformed
 
     private void btnKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembaliActionPerformed

@@ -26,13 +26,7 @@ public class formUtamaAdmin extends javax.swing.JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
         txtGreet.setText("SELAMAT DATANG " + formLoginAdmin.getNama().toUpperCase());
-        
-        formKelolaBuku kelolaBuku = new formKelolaBuku();
-        
-        if(kelolaBuku.isClosed()) {
-            System.out.println("Status true");
-        }
-         
+          
     }
 
     /**

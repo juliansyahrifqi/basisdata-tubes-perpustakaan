@@ -27,6 +27,8 @@ public class formLoginAdmin extends javax.swing.JFrame {
     
     public formLoginAdmin() {
         initComponents();
+        
+        txtUsername.requestFocus();
     }
     
     public void cek_login() {
