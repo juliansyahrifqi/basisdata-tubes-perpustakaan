@@ -51,10 +51,7 @@ public class formUtamaAnggota extends javax.swing.JFrame {
         
         // Set posisi form kelola buku ke center
         myProfile.setLocation((layarUtama.width - layarProfile.width)/2, (layarUtama.height - layarProfile.height)/4);
-        
-        System.out.println(layarProfile.width);
-        System.out.println(layarProfile.height);
-        
+         
         // Menambahkan halaman form kelola buku di panel utama
         panelUtama.add(myProfile);
         myProfile.setVisible(true);
@@ -64,6 +61,7 @@ public class formUtamaAnggota extends javax.swing.JFrame {
         panelUtama.add(btnProfile);
         panelUtama.add(btnKoleksiBuku);
         panelUtama.add(btnPinjamBuku);
+        panelUtama.add(btnDaftarPinjaman);
         panelUtama.add(btnHistoriPinjam);
         panelUtama.add(btnLogout);
     }
@@ -92,6 +90,94 @@ public class formUtamaAnggota extends javax.swing.JFrame {
         panelUtama.add(btnProfile);
         panelUtama.add(btnKoleksiBuku);
         panelUtama.add(btnPinjamBuku);
+        panelUtama.add(btnDaftarPinjaman);
+        panelUtama.add(btnHistoriPinjam);
+        panelUtama.add(btnLogout);
+    }
+    
+    private void show_pinjam_buku() {
+        // Menghapus komponen lain di panel utama
+        panelUtama.removeAll();
+        panelUtama.repaint();
+        
+        // Instance class form kelola buku
+        formPinjamBuku pinjamBuku = new formPinjamBuku();
+        
+        // Mengambil ukuran layar utama dan layar form kelola buku
+        Dimension layarUtama = this.getSize();
+        Dimension layarPinjam = pinjamBuku.getSize();
+        
+        // Set posisi form kelola buku ke center
+        pinjamBuku.setLocation((layarUtama.width - layarPinjam.width)/2, (layarUtama.height - layarPinjam.height)/4);
+        
+        // Menambahkan halaman form kelola buku di panel utama
+        panelUtama.add(pinjamBuku);
+        pinjamBuku.setVisible(true);
+        
+        // Menambahkan kembali komponen yang ada di panel utama
+        panelUtama.add(txtGreet);
+        panelUtama.add(btnProfile);
+        panelUtama.add(btnKoleksiBuku);
+        panelUtama.add(btnPinjamBuku);
+        panelUtama.add(btnDaftarPinjaman);
+        panelUtama.add(btnHistoriPinjam);
+        panelUtama.add(btnLogout);
+    }
+    
+    private void show_histori_peminjaman() {
+        // Menghapus komponen lain di panel utama
+        panelUtama.removeAll();
+        panelUtama.repaint();
+        
+        // Instance class form kelola buku
+        formHistoriPeminjaman historiPeminjaman = new formHistoriPeminjaman();
+        
+        // Mengambil ukuran layar utama dan layar form kelola buku
+        Dimension layarUtama = this.getSize();
+        Dimension layarHistori = historiPeminjaman.getSize();
+        
+        // Set posisi form kelola buku ke center
+        historiPeminjaman.setLocation((layarUtama.width - layarHistori.width)/2, (layarUtama.height - layarHistori.height)/4);
+        
+        // Menambahkan halaman form kelola buku di panel utama
+        panelUtama.add(historiPeminjaman);
+        historiPeminjaman.setVisible(true);
+        
+        // Menambahkan kembali komponen yang ada di panel utama
+        panelUtama.add(txtGreet);
+        panelUtama.add(btnProfile);
+        panelUtama.add(btnKoleksiBuku);
+        panelUtama.add(btnPinjamBuku);
+        panelUtama.add(btnDaftarPinjaman);
+        panelUtama.add(btnHistoriPinjam);
+        panelUtama.add(btnLogout);
+    }
+    
+    private void show_data_pinjaman() {
+        // Menghapus komponen lain di panel utama
+        panelUtama.removeAll();
+        panelUtama.repaint();
+        
+        // Instance class form kelola buku
+        formPinjamanSaya pinjamanSaya = new formPinjamanSaya();
+        
+        // Mengambil ukuran layar utama dan layar form kelola buku
+        Dimension layarUtama = this.getSize();
+        Dimension layarPinjamanSaya = pinjamanSaya.getSize();
+        
+        // Set posisi form kelola buku ke center
+        pinjamanSaya.setLocation((layarUtama.width - layarPinjamanSaya.width)/2, (layarUtama.height - layarPinjamanSaya.height)/4);
+        
+        // Menambahkan halaman form kelola buku di panel utama
+        panelUtama.add(pinjamanSaya);
+        pinjamanSaya.setVisible(true);
+        
+        // Menambahkan kembali komponen yang ada di panel utama
+        panelUtama.add(txtGreet);
+        panelUtama.add(btnProfile);
+        panelUtama.add(btnKoleksiBuku);
+        panelUtama.add(btnPinjamBuku);
+        panelUtama.add(btnDaftarPinjaman);
         panelUtama.add(btnHistoriPinjam);
         panelUtama.add(btnLogout);
     }
@@ -109,6 +195,7 @@ public class formUtamaAnggota extends javax.swing.JFrame {
         btnProfile = new javax.swing.JButton();
         btnKoleksiBuku = new javax.swing.JButton();
         btnPinjamBuku = new javax.swing.JButton();
+        btnDaftarPinjaman = new javax.swing.JButton();
         btnHistoriPinjam = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
         txtGreet = new javax.swing.JLabel();
@@ -119,16 +206,19 @@ public class formUtamaAnggota extends javax.swing.JFrame {
         menuData = new javax.swing.JMenu();
         menuKoleksiBuku = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        formPeminjaman = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
+        formHistoriPeminjaman = new javax.swing.JMenuItem();
+        menuPinjamBuku = new javax.swing.JMenu();
+        formPinjamBuku = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("MENU UTAMA ANGGOTA");
 
         panelUtama.setPreferredSize(new java.awt.Dimension(1366, 632));
 
         btnProfile.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        btnProfile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/anggota.png"))); // NOI18N
         btnProfile.setText("My Profile");
         btnProfile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,6 +227,7 @@ public class formUtamaAnggota extends javax.swing.JFrame {
         });
 
         btnKoleksiBuku.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        btnKoleksiBuku.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/buku.png"))); // NOI18N
         btnKoleksiBuku.setText("Daftar Koleksi Perpustakaan");
         btnKoleksiBuku.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,10 +236,31 @@ public class formUtamaAnggota extends javax.swing.JFrame {
         });
 
         btnPinjamBuku.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        btnPinjamBuku.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/add-book.png"))); // NOI18N
         btnPinjamBuku.setText("Pinjam Buku");
+        btnPinjamBuku.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPinjamBukuActionPerformed(evt);
+            }
+        });
+
+        btnDaftarPinjaman.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        btnDaftarPinjaman.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/pinjaman-buku.png"))); // NOI18N
+        btnDaftarPinjaman.setText("Pinjaman Buku Saya");
+        btnDaftarPinjaman.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDaftarPinjamanActionPerformed(evt);
+            }
+        });
 
         btnHistoriPinjam.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        btnHistoriPinjam.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/histori.png"))); // NOI18N
         btnHistoriPinjam.setText("Histori Peminjaman Buku");
+        btnHistoriPinjam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHistoriPinjamActionPerformed(evt);
+            }
+        });
 
         btnLogout.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         btnLogout.setText("Logout");
@@ -159,12 +271,14 @@ public class formUtamaAnggota extends javax.swing.JFrame {
         });
 
         txtGreet.setFont(new java.awt.Font("American Captain", 0, 48)); // NOI18N
+        txtGreet.setForeground(new java.awt.Color(255, 255, 255));
         txtGreet.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtGreet.setPreferredSize(new java.awt.Dimension(1366, 15));
 
         panelUtama.setLayer(btnProfile, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panelUtama.setLayer(btnKoleksiBuku, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panelUtama.setLayer(btnPinjamBuku, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panelUtama.setLayer(btnDaftarPinjaman, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panelUtama.setLayer(btnHistoriPinjam, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panelUtama.setLayer(btnLogout, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panelUtama.setLayer(txtGreet, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -174,43 +288,38 @@ public class formUtamaAnggota extends javax.swing.JFrame {
         panelUtamaLayout.setHorizontalGroup(
             panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelUtamaLayout.createSequentialGroup()
-                .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelUtamaLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(txtGreet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelUtamaLayout.createSequentialGroup()
-                        .addGap(399, 399, 399)
-                        .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(panelUtamaLayout.createSequentialGroup()
-                                .addComponent(btnPinjamBuku, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnHistoriPinjam, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelUtamaLayout.createSequentialGroup()
-                                .addComponent(btnProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(96, 96, 96)
-                                .addComponent(btnKoleksiBuku, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(txtGreet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(panelUtamaLayout.createSequentialGroup()
-                .addGap(561, 561, 561)
-                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(310, 310, 310)
+                .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnProfile, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
+                    .addComponent(btnPinjamBuku, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
+                    .addComponent(btnHistoriPinjam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(73, 73, 73)
+                .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnLogout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnKoleksiBuku, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDaftarPinjaman, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         panelUtamaLayout.setVerticalGroup(
             panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelUtamaLayout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addComponent(txtGreet, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnKoleksiBuku, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnKoleksiBuku, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41)
+                .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnPinjamBuku, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                    .addComponent(btnDaftarPinjaman, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(45, 45, 45)
                 .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnPinjamBuku, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnHistoriPinjam, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(61, 61, 61)
-                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81))
+                    .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnHistoriPinjam, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(57, 57, 57))
         );
 
         menuAkun.setText("Akun");
@@ -244,17 +353,41 @@ public class formUtamaAnggota extends javax.swing.JFrame {
         menuData.add(menuKoleksiBuku);
         menuData.add(jSeparator1);
 
-        jMenuItem3.setText("Data Peminjaman");
-        menuData.add(jMenuItem3);
+        formPeminjaman.setText("Data Buku Yang Dipinjam");
+        formPeminjaman.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                formPeminjamanActionPerformed(evt);
+            }
+        });
+        menuData.add(formPeminjaman);
         menuData.add(jSeparator2);
 
-        jMenuItem4.setText("Histori Peminjaman");
-        menuData.add(jMenuItem4);
+        formHistoriPeminjaman.setText("Histori Peminjaman");
+        formHistoriPeminjaman.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                formHistoriPeminjamanActionPerformed(evt);
+            }
+        });
+        menuData.add(formHistoriPeminjaman);
 
         jMenuBar1.add(menuData);
 
-        jMenu1.setText("Pinjam Buku");
-        jMenuBar1.add(jMenu1);
+        menuPinjamBuku.setText("Pinjam");
+        menuPinjamBuku.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuPinjamBukuActionPerformed(evt);
+            }
+        });
+
+        formPinjamBuku.setText("Pinjam Buku");
+        formPinjamBuku.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                formPinjamBukuActionPerformed(evt);
+            }
+        });
+        menuPinjamBuku.add(formPinjamBuku);
+
+        jMenuBar1.add(menuPinjamBuku);
 
         setJMenuBar(jMenuBar1);
 
@@ -279,8 +412,7 @@ public class formUtamaAnggota extends javax.swing.JFrame {
     }//GEN-LAST:event_menuLogoutActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
-        // TODO add your handling code here:
-        
+
         do_logout();
     }//GEN-LAST:event_btnLogoutActionPerformed
 
@@ -299,6 +431,34 @@ public class formUtamaAnggota extends javax.swing.JFrame {
     private void btnKoleksiBukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKoleksiBukuActionPerformed
         show_buku();
     }//GEN-LAST:event_btnKoleksiBukuActionPerformed
+
+    private void menuPinjamBukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPinjamBukuActionPerformed
+        show_pinjam_buku();
+    }//GEN-LAST:event_menuPinjamBukuActionPerformed
+
+    private void btnPinjamBukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPinjamBukuActionPerformed
+        show_pinjam_buku();
+    }//GEN-LAST:event_btnPinjamBukuActionPerformed
+
+    private void btnDaftarPinjamanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDaftarPinjamanActionPerformed
+        show_data_pinjaman();
+    }//GEN-LAST:event_btnDaftarPinjamanActionPerformed
+
+    private void btnHistoriPinjamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoriPinjamActionPerformed
+        show_histori_peminjaman();
+    }//GEN-LAST:event_btnHistoriPinjamActionPerformed
+
+    private void formHistoriPeminjamanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formHistoriPeminjamanActionPerformed
+        show_histori_peminjaman();
+    }//GEN-LAST:event_formHistoriPeminjamanActionPerformed
+
+    private void formPeminjamanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formPeminjamanActionPerformed
+        show_data_pinjaman();
+    }//GEN-LAST:event_formPeminjamanActionPerformed
+
+    private void formPinjamBukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formPinjamBukuActionPerformed
+        show_pinjam_buku();
+    }//GEN-LAST:event_formPinjamBukuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -336,21 +496,23 @@ public class formUtamaAnggota extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDaftarPinjaman;
     private javax.swing.JButton btnHistoriPinjam;
     private javax.swing.JButton btnKoleksiBuku;
     public javax.swing.JButton btnLogout;
     private javax.swing.JButton btnPinjamBuku;
     private javax.swing.JButton btnProfile;
-    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuItem formHistoriPeminjaman;
+    private javax.swing.JMenuItem formPeminjaman;
+    private javax.swing.JMenuItem formPinjamBuku;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JMenu menuAkun;
     private javax.swing.JMenu menuData;
     private javax.swing.JMenuItem menuKoleksiBuku;
     private javax.swing.JMenuItem menuLogout;
+    private javax.swing.JMenu menuPinjamBuku;
     private javax.swing.JMenuItem menuProfile;
     private javax.swing.JDesktopPane panelUtama;
     private javax.swing.JLabel txtGreet;

@@ -52,7 +52,7 @@ public class formUtamaAdmin extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         formKelolaAnggota = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        formKelolaPeminjaman = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -61,12 +61,14 @@ public class formUtamaAdmin extends javax.swing.JFrame {
         panelUtama.setPreferredSize(new java.awt.Dimension(1366, 632));
 
         txtGreet.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        txtGreet.setForeground(new java.awt.Color(255, 255, 255));
         txtGreet.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtGreet.setPreferredSize(new java.awt.Dimension(1366, 0));
 
         btnKelolaBuku.setBackground(new java.awt.Color(75, 75, 75));
         btnKelolaBuku.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         btnKelolaBuku.setForeground(new java.awt.Color(255, 255, 255));
+        btnKelolaBuku.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/buku.png"))); // NOI18N
         btnKelolaBuku.setText("Pengelolaan Data Buku");
         btnKelolaBuku.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,6 +77,7 @@ public class formUtamaAdmin extends javax.swing.JFrame {
         });
 
         btnKelolaAnggota.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        btnKelolaAnggota.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/anggota.png"))); // NOI18N
         btnKelolaAnggota.setText("Pengelolaan Data Anggota");
         btnKelolaAnggota.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,7 +86,13 @@ public class formUtamaAdmin extends javax.swing.JFrame {
         });
 
         btnKelolaPeminjaman.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        btnKelolaPeminjaman.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/histori.png"))); // NOI18N
         btnKelolaPeminjaman.setText("Pengelolaan Data Peminjaman");
+        btnKelolaPeminjaman.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKelolaPeminjamanActionPerformed(evt);
+            }
+        });
 
         btnLogout.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         btnLogout.setText("LOGOUT");
@@ -104,20 +113,18 @@ public class formUtamaAdmin extends javax.swing.JFrame {
         panelUtamaLayout.setHorizontalGroup(
             panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelUtamaLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtGreet, javax.swing.GroupLayout.PREFERRED_SIZE, 1366, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelUtamaLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(txtGreet, javax.swing.GroupLayout.PREFERRED_SIZE, 1366, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelUtamaLayout.createSequentialGroup()
-                        .addGap(392, 392, 392)
-                        .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnKelolaPeminjaman, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnKelolaBuku, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(89, 89, 89)
+                        .addGap(301, 301, 301)
+                        .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnKelolaBuku, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnKelolaPeminjaman, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(93, 93, 93)
                         .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnKelolaAnggota, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(0, Short.MAX_VALUE))
+                            .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnKelolaAnggota, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)))))
         );
         panelUtamaLayout.setVerticalGroup(
             panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,11 +135,11 @@ public class formUtamaAdmin extends javax.swing.JFrame {
                 .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnKelolaBuku, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnKelolaAnggota, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(71, 71, 71)
+                .addGap(38, 38, 38)
                 .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnKelolaPeminjaman, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(97, Short.MAX_VALUE))
+                    .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnKelolaPeminjaman, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(130, Short.MAX_VALUE))
         );
 
         menuAkun.setText("Akun");
@@ -167,8 +174,13 @@ public class formUtamaAdmin extends javax.swing.JFrame {
         menuData.add(formKelolaAnggota);
         menuData.add(jSeparator2);
 
-        jMenuItem4.setText("Data Peminjaman");
-        menuData.add(jMenuItem4);
+        formKelolaPeminjaman.setText("Data Peminjaman");
+        formKelolaPeminjaman.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                formKelolaPeminjamanActionPerformed(evt);
+            }
+        });
+        menuData.add(formKelolaPeminjaman);
 
         jMenuBar1.add(menuData);
 
@@ -328,6 +340,61 @@ public class formUtamaAdmin extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Anda berhasil logout");
     }//GEN-LAST:event_btnLogoutActionPerformed
 
+    private void formKelolaPeminjamanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formKelolaPeminjamanActionPerformed
+        
+        // TODO add your handling code here:
+        // Menghapus komponen lain di panel utama
+        panelUtama.removeAll();
+        panelUtama.repaint();
+        
+        // Instance class form kelola buku
+        formKelolaPeminjaman kelolaPeminjaman = new formKelolaPeminjaman();
+        
+        // Mengambil ukuran layar utama dan layar form kelola buku
+        Dimension layarUtama = this.getSize();
+        Dimension layarKelolaPeminjaman = kelolaPeminjaman.getSize();
+        
+        // Set posisi form kelola buku ke center
+        kelolaPeminjaman.setLocation((layarUtama.width - layarKelolaPeminjaman.width)/2, (layarUtama.height - layarKelolaPeminjaman.height)/4);
+        
+        // Menambahkan halaman form kelola buku di panel utama
+        panelUtama.add(kelolaPeminjaman);
+        kelolaPeminjaman.setVisible(true);
+        
+        panelUtama.add(txtGreet);
+        panelUtama.add(btnKelolaBuku);
+        panelUtama.add(btnKelolaAnggota);
+        panelUtama.add(btnKelolaPeminjaman);
+        panelUtama.add(btnLogout);
+    }//GEN-LAST:event_formKelolaPeminjamanActionPerformed
+
+    private void btnKelolaPeminjamanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKelolaPeminjamanActionPerformed
+        // TODO add your handling code here:
+        // Menghapus komponen lain di panel utama
+        panelUtama.removeAll();
+        panelUtama.repaint();
+        
+        // Instance class form kelola buku
+        formKelolaPeminjaman kelolaPeminjaman = new formKelolaPeminjaman();
+        
+        // Mengambil ukuran layar utama dan layar form kelola buku
+        Dimension layarUtama = this.getSize();
+        Dimension layarKelolaPeminjaman = kelolaPeminjaman.getSize();
+        
+        // Set posisi form kelola buku ke center
+        kelolaPeminjaman.setLocation((layarUtama.width - layarKelolaPeminjaman.width)/2, (layarUtama.height - layarKelolaPeminjaman.height)/4);
+        
+        // Menambahkan halaman form kelola buku di panel utama
+        panelUtama.add(kelolaPeminjaman);
+        kelolaPeminjaman.setVisible(true);
+        
+        panelUtama.add(txtGreet);
+        panelUtama.add(btnKelolaBuku);
+        panelUtama.add(btnKelolaAnggota);
+        panelUtama.add(btnKelolaPeminjaman);
+        panelUtama.add(btnLogout);
+    }//GEN-LAST:event_btnKelolaPeminjamanActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -372,9 +439,9 @@ public class formUtamaAdmin extends javax.swing.JFrame {
     private javax.swing.JButton btnLogout;
     private javax.swing.JMenuItem formKelolaAnggota;
     private javax.swing.JMenuItem formKelolaBuku;
+    private javax.swing.JMenuItem formKelolaPeminjaman;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JMenu menuAkun;

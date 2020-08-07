@@ -57,7 +57,7 @@ public class formLoginAdmin extends javax.swing.JFrame {
                 // Jika data admin tidak ditemukan atau username dan password salah
                 // Tampilkan pesan
         
-                JOptionPane.showMessageDialog(null, "Pasword atau Username Anda Salah!");
+                JOptionPane.showMessageDialog(null, "Username atau password anda salah!");
                 txtUsername.setText("");
                 txtPassword.setText("");
                 txtUsername.requestFocus();

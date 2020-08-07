@@ -66,7 +66,7 @@ public class formLoginAnggota extends javax.swing.JFrame {
                     this.dispose();
                 } 
             } else {   
-                JOptionPane.showMessageDialog(null, "Pasword atau Username Anda Salah!");
+                JOptionPane.showMessageDialog(null, "Username atau password anda salah!");
                 txtUsername.setText("");
                 txtPassword.setText("");
                 txtUsername.requestFocus();

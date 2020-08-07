@@ -133,6 +133,7 @@ public class formProfile extends javax.swing.JInternalFrame {
         jButton2 = new javax.swing.JButton();
         btnKembali = new javax.swing.JButton();
 
+        setTitle("PROFILE ANGGOTA");
         setPreferredSize(new java.awt.Dimension(800, 632));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

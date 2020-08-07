@@ -11,6 +11,16 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/home/oyeaaa/NetBeansProjects/Blog/Perpustakaan/src/form/formUtamaAdmin.java</file>
+            <file>file:/home/oyeaaa/NetBeansProjects/Blog/Perpustakaan/src/form/formUtamaAnggota.java</file>
+            <file>file:/home/oyeaaa/NetBeansProjects/Blog/Perpustakaan/src/form/formKoleksiBuku.java</file>
+            <file>file:/home/oyeaaa/NetBeansProjects/Blog/Perpustakaan/src/form/formKelolaPeminjaman.java</file>
+            <file>file:/home/oyeaaa/NetBeansProjects/Blog/Perpustakaan/src/form/formPinjamanSaya.java</file>
+            <file>file:/home/oyeaaa/NetBeansProjects/Blog/Perpustakaan/src/form/formKelolaAnggota.java</file>
+            <file>file:/home/oyeaaa/NetBeansProjects/Blog/Perpustakaan/src/form/formKelolaBuku.java</file>
+            <file>file:/home/oyeaaa/NetBeansProjects/Blog/Perpustakaan/src/form/formHistoriPeminjaman.java</file>
+            <file>file:/home/oyeaaa/NetBeansProjects/Blog/Perpustakaan/src/form/formPinjamBuku.java</file>
+        </group>
     </open-files>
 </project-private>
