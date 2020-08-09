@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import perpustakaan.Koneksi;
-import perpustakaan.MenuLogin;
+import perpustakaan.menuLogin;
 
 /**
  *
@@ -26,6 +26,7 @@ public class formDaftarAnggota extends javax.swing.JFrame {
         initComponents();
     }
     
+    // Method untuk cek username apakah sudah dipakai atau belum
     private boolean cek_username(String x) {
         // Koneksi ke database
         Connection kon = Koneksi.koneksiDB();
@@ -84,7 +85,7 @@ public class formDaftarAnggota extends javax.swing.JFrame {
             // Lanjutkan ke menu login dan tampilkan pesan berhasil
             if(baris > 0) {
                 JOptionPane.showMessageDialog(null, "Pendaftaran Berhasil! Silahkan Login!");
-                MenuLogin menu = new MenuLogin();
+                menuLogin menu = new menuLogin();
                 menu.show();
                 this.dispose();
             } else {
@@ -271,7 +272,7 @@ public class formDaftarAnggota extends javax.swing.JFrame {
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         // Reset semua field
-        
+   
         txtNama.setText("");
         txtNoTlp.setText("");
         txtAlamat.setText("");
@@ -281,8 +282,8 @@ public class formDaftarAnggota extends javax.swing.JFrame {
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void btnKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembaliActionPerformed
-        // TODO add your handling code here:
-        MenuLogin menuLogin = new MenuLogin();
+        // Jika tombol kembali ditekan, maka kembali ke halaman utama
+        menuLogin menuLogin = new menuLogin();
         
         menuLogin.setVisible(true);
         this.dispose();

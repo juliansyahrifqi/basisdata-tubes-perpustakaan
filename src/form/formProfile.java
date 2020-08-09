@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import perpustakaan.Koneksi;
-import perpustakaan.MenuLogin;
+import perpustakaan.menuLogin;
 
 /**
  *
@@ -23,20 +23,24 @@ public class formProfile extends javax.swing.JInternalFrame {
      */
     public formProfile() {
         initComponents();
-        get_data();
+        load_my_profile();
     }
     
-    public void get_data() {
+    public void load_my_profile() {
         
+        // Koneksi ke database
         Connection kon = Koneksi.koneksiDB();
         
         try {
+            // Mempersiapkan statement
             Statement stmt = kon.createStatement();
             
+            // Query sql
             String sql = "SELECT nama_anggota, alamat, no_tlp, username, password "
                     + " FROM anggota"
                     + " WHERE id_anggota = '"+formLoginAnggota.getId()+"'";
             
+            // Mengeksekusi query sql
             ResultSet rs = stmt.executeQuery(sql);
             
             if(rs.next()) {
@@ -63,12 +67,17 @@ public class formProfile extends javax.swing.JInternalFrame {
         }
     }
     
+    // Method untuk mengedit akun
     private void edit_akun() {
+        
+        // Koneksi database
         Connection kon = Koneksi.koneksiDB();
         
         try {
+            // Mempersiapkan statement
             Statement stmt = kon.createStatement();
             
+            // Query sql
             String sql = "UPDATE anggota SET "
                     + " nama_anggota = '"+txtNama.getText()
                     +"', no_tlp = '"+txtNoTlp.getText()
@@ -77,6 +86,7 @@ public class formProfile extends javax.swing.JInternalFrame {
                     +"', password = '"+txtPassword.getText()
                     +"' WHERE id_anggota = '"+formLoginAnggota.getId()+"'";
             
+            // Eksekusi query
             int baris = stmt.executeUpdate(sql);
             
             if(baris > 0) {
@@ -89,6 +99,7 @@ public class formProfile extends javax.swing.JInternalFrame {
         }
     }
     
+    // Method untuk validasi apakah semua field sudah diisi
     private boolean is_filled() {
         boolean filled = false;
         
@@ -248,7 +259,7 @@ public class formProfile extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnKembaliActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+       // Jika semua field sudah diisi, edit akun
        if(is_filled()) {
            edit_akun();
        }

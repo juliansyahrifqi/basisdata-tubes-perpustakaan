@@ -23,7 +23,8 @@ public class formPinjamBuku extends javax.swing.JInternalFrame {
 
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     Date date = new Date();
-    
+
+    // Mendapatkan tanggal sekarang
     String tanggalSekarang = dateFormat.format(date);
    
     /**
@@ -32,12 +33,13 @@ public class formPinjamBuku extends javax.swing.JInternalFrame {
     public formPinjamBuku() {
         initComponents();
         load_judul_buku();
-        load_pinjam_hari();
-            
+        load_peminjaman_hari();
+        
+        // Tanggal pinjam set dengan tanggal sekarang
         txtTanggalPinjam.setText(tanggalSekarang);
         set_tanggal_kembali();
         
-        
+        // Session login anggota
         txtIdAnggota.setText(Integer.toString(formLoginAnggota.getId()));
         txtNamaAnggota.setText(formLoginAnggota.getNama());
         
@@ -49,25 +51,31 @@ public class formPinjamBuku extends javax.swing.JInternalFrame {
         txtPenulis.setEditable(false);
     }
     
+    // Mendapatkan id peminjaman
     private int getID() {
         
+        // Koneksi ke database
         Connection kon = Koneksi.koneksiDB();
         
         try {
-            int no=0;
+                // Set variabel no ke 0
+                int no=0;
                 
+                // Mempersiapkan statement
                 Statement stmt = kon.createStatement();
                 
+                // Query sql
                 String sql = "SELECT COUNT(*) as id_peminjaman from peminjaman ";
                 
+                // Eksekusi query dan menyimpan datanya
                 ResultSet rs = stmt.executeQuery(sql);
 
+                // Jika data ada, set id_peminjaman + 1;
                 if (rs.next()) {
                     no = rs.getInt("id_peminjaman") + 1;
                 }
 
-                rs.close();
-
+                // Kembalikan variabel no
                 return no;
 
         } catch (Exception e) {
@@ -76,27 +84,42 @@ public class formPinjamBuku extends javax.swing.JInternalFrame {
         }
     }    
     
+    
+    // Method untuk menset tanggal kembali peminjaman
     private void set_tanggal_kembali() {
-         
+        
         Calendar cal = Calendar.getInstance();
+        
+        // Set waktu ke tanggal sekarang
         cal.setTime(date);
+        
+        // Tambahkan 5 hari dari tanggal sekarang
         cal.add(Calendar.DATE, 5);
 
+        // Mendapatkan waktu 5 hari ke depan
         Date expirationDate = cal.getTime();
         
-        String kembali = dateFormat.format(expirationDate);
+        // Format dari date menjadi string
+        String tanggal_kembali = dateFormat.format(expirationDate);
 
-        txtTanggalKembali.setText(kembali);
+        // Set textfield tanggal kembali otomatis dengan tanggal 5 hari kedepan
+        txtTanggalKembali.setText(tanggal_kembali);
     }
     
+    // Method untuk menampilkan judul buku ke dalam combo box
     private void load_judul_buku() {
+        // Koneksi Database
         Connection kon = Koneksi.koneksiDB();
         
         try {
+            
+            // Mempersiapkan statement
             Statement stmt = kon.createStatement();
 
+            // Query sql
             String sql = "SELECT * FROM buku WHERE status = 'ADA'";
             
+            // Mengeksekusi query dan menyimpan datanya
             ResultSet rs = stmt.executeQuery(sql);
             
             while(rs.next()) {
@@ -109,15 +132,21 @@ public class formPinjamBuku extends javax.swing.JInternalFrame {
         }
     }
     
+    // Method untuk menampilkan penulis buku dari judul buku yang dipilih
     private void load_penulis_buku() {
         
+        // Koneksi database
         Connection kon = Koneksi.koneksiDB();
         
         try {
+            
+            // Mempersiapkan statement
             Statement stmt = kon.createStatement();
 
+            // Query sql
             String sql = "SELECT * FROM buku WHERE judul_buku = '"+cbJudulBuku.getSelectedItem()+"'";
             
+            // Mengeksekusi query, dan menyimpan datanya
             ResultSet rs = stmt.executeQuery(sql);
             
             while(rs.next()) {
@@ -131,20 +160,27 @@ public class formPinjamBuku extends javax.swing.JInternalFrame {
         }
     }
     
+    // Method untuk pinjam buku
     private void pinjam_buku() {
+        
+        // Koneksi ke database
         Connection kon = Koneksi.koneksiDB();
         
         try {
+            // Mempersiapkan statement
             Statement stmt = kon.createStatement();
             
+            // Query sql pertama
             String sql = "INSERT INTO peminjaman VALUES (default, '"+txtIdAnggota.getText()+"')";
-                    
+                   
+            // Query sql kedua
             String sql2 = "INSERT INTO detail_peminjaman "
                     + " VALUES ('"+getID()+"','"+txtIdBuku.getText()
                     +"','"+txtTanggalPinjam.getText()
                     +"','"+txtTanggalKembali.getText()
                     +"', 'DIPINJAM');";
             
+            // Eksekusi query pertama dan kedua
             int baris1 = stmt.executeUpdate(sql);
             int baris2 = stmt.executeUpdate(sql2);
             
@@ -159,7 +195,10 @@ public class formPinjamBuku extends javax.swing.JInternalFrame {
         }
     }
     
-    private void load_pinjam_hari() {
+    // Menampilkan data buku yang dipinjam pada hari ini
+    private void load_peminjaman_hari() {
+        
+        // Koneksi ke database
         Connection kon = Koneksi.koneksiDB();
         
         // Nama header tabel
@@ -169,9 +208,13 @@ public class formPinjamBuku extends javax.swing.JInternalFrame {
         tblPeminjaman.setModel(data);
         
         try {
+            
+            // Mempersiapkan statement
             Statement stmt = kon.createStatement();
 
-            String sql = "SELECT detail_peminjaman.id_peminjaman, nama_anggota, judul_buku, penulis, tanggal_pinjam, tanggal_kembali, detail_peminjaman.status "
+            // Query sql
+            String sql = "SELECT detail_peminjaman.id_peminjaman, nama_anggota, judul_buku, penulis, tanggal_pinjam, "
+                    + "tanggal_kembali, detail_peminjaman.status "
                     + "FROM detail_peminjaman "
                     + "INNER JOIN buku ON detail_peminjaman.id_buku = buku.id_buku "
                     + "INNER JOIN peminjaman ON detail_peminjaman.id_peminjaman = peminjaman.id_peminjaman "
@@ -179,6 +222,7 @@ public class formPinjamBuku extends javax.swing.JInternalFrame {
                     + "WHERE tanggal_pinjam = '"+tanggalSekarang+"' AND anggota.id_anggota = '"+formLoginAnggota.getId()
                     + "' ORDER BY id_peminjaman";
             
+            // Mengeksekusi query sql
             ResultSet rs = stmt.executeQuery(sql);
             
             while(rs.next()) {
@@ -189,8 +233,7 @@ public class formPinjamBuku extends javax.swing.JInternalFrame {
                 String tanggal_pinjam = rs.getString(5);
                 String tanggal_kembali = rs.getString(6);
                 String status = rs.getString(7);
-                
-                
+                 
                 String d[] = {id_peminjaman, nama_anggota, judul_buku, penulis, tanggal_pinjam, tanggal_kembali, status};
                 data.addRow(d);
             }
@@ -199,7 +242,10 @@ public class formPinjamBuku extends javax.swing.JInternalFrame {
         }
     }
     
-    private void cari_data() {
+    // Cari data peminjaman pada hari ini
+    private void cari_peminjaman_hari() {
+        
+        // Koneksi ke database
         Connection kon = Koneksi.koneksiDB();
         
         // Nama header tabel
@@ -209,8 +255,11 @@ public class formPinjamBuku extends javax.swing.JInternalFrame {
         tblPeminjaman.setModel(data);
         
         try {
+            
+            // Mempersiapkan statement
             Statement stmt = kon.createStatement();
 
+            // Query sql
             String sql = "SELECT detail_peminjaman.id_peminjaman, nama_anggota, judul_buku, penulis, tanggal_pinjam, tanggal_kembali, detail_peminjaman.status "
                     + "FROM detail_peminjaman "
                     + "INNER JOIN buku ON detail_peminjaman.id_buku = buku.id_buku "
@@ -220,6 +269,7 @@ public class formPinjamBuku extends javax.swing.JInternalFrame {
                     +"' AND judul_buku LIKE '%"+txtCari.getText()+"%'"
                     + "ORDER BY detail_peminjaman.id_peminjaman";
             
+            // Mengeksekusi query
             ResultSet rs = stmt.executeQuery(sql);
             
             while(rs.next()) {
@@ -230,7 +280,6 @@ public class formPinjamBuku extends javax.swing.JInternalFrame {
                 String tanggal_pinjam = rs.getString(5);
                 String tanggal_kembali = rs.getString(6);
                 String status = rs.getString(7);
-                
                 
                 String d[] = {id_peminjaman, nama_anggota, judul_buku, penulis, tanggal_pinjam, tanggal_kembali, status};
                 data.addRow(d);
@@ -469,6 +518,8 @@ public class formPinjamBuku extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbJudulBukuActionPerformed
 
     private void btnPinjamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPinjamActionPerformed
+        
+        // Konfirmasi pinjam buku
         int pinjam = JOptionPane.showOptionDialog(this, 
                 "Anda yakin pinjam buku ini?", null, JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE, null, null, null);
@@ -486,7 +537,7 @@ public class formPinjamBuku extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
-        load_pinjam_hari();
+        load_peminjaman_hari();
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void btnKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembaliActionPerformed
@@ -498,7 +549,7 @@ public class formPinjamBuku extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtCariMouseClicked
 
     private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
-        cari_data();
+        cari_peminjaman_hari();
     }//GEN-LAST:event_btnCariActionPerformed
 
 

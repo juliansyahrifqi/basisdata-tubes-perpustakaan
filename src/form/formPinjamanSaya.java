@@ -24,10 +24,12 @@ public class formPinjamanSaya extends javax.swing.JInternalFrame {
     public formPinjamanSaya() {
         initComponents();
         
-        load_data();
+        load_pinjaman_saya();
     }
     
-    private void load_data() {
+    private void load_pinjaman_saya() {
+        
+        // Koneksi ke database
         Connection kon = Koneksi.koneksiDB();
         
         // Nama header tabel
@@ -37,9 +39,13 @@ public class formPinjamanSaya extends javax.swing.JInternalFrame {
         tblPinjamanSaya.setModel(data);
         
         try {
+            
+            // Mempersiapkan statement
             Statement stmt = kon.createStatement();
 
-            String sql = "SELECT detail_peminjaman.id_peminjaman, nama_anggota, judul_buku, penulis, tanggal_pinjam, tanggal_kembali, detail_peminjaman.status "
+            // Query sql
+            String sql = "SELECT detail_peminjaman.id_peminjaman, nama_anggota, judul_buku, penulis, "
+                    + "tanggal_pinjam, tanggal_kembali, detail_peminjaman.status "
                     + "FROM detail_peminjaman "
                     + "INNER JOIN buku ON detail_peminjaman.id_buku = buku.id_buku "
                     + "INNER JOIN peminjaman ON detail_peminjaman.id_peminjaman = peminjaman.id_peminjaman "
@@ -47,6 +53,7 @@ public class formPinjamanSaya extends javax.swing.JInternalFrame {
                     + "WHERE anggota.id_anggota = '"+formLoginAnggota.getId()+"'AND detail_peminjaman.status = 'DIPINJAM'"
                     + " ORDER BY id_peminjaman";
             
+            // Mengeksekusi query, dan menyimpan datanya
             ResultSet rs = stmt.executeQuery(sql);
             
             while(rs.next()) {
@@ -58,7 +65,6 @@ public class formPinjamanSaya extends javax.swing.JInternalFrame {
                 String tanggal_kembali = rs.getString(6);
                 String status = rs.getString(7);
                 
-                
                 String d[] = {id_peminjaman, nama_anggota, judul_buku, penulis, tanggal_pinjam, tanggal_kembali, status};
                 data.addRow(d);
             }
@@ -67,25 +73,28 @@ public class formPinjamanSaya extends javax.swing.JInternalFrame {
         }
     }
     
+    // Method untuk kembalikan buku yang dipinjam
     private void kembalikan_buku() {
         
+        // Koneksi ke database
         Connection kon = Koneksi.koneksiDB();
         
         try {
-            
-         
-            
+             
+            // Mempersiapkan statement
             Statement stmt = kon.createStatement();
             
+            // Query sql
             String sql = "UPDATE detail_peminjaman SET "
                     + " status = 'DIKEMBALIKAN'"
                     + "WHERE id_peminjaman = '"+tblPinjamanSaya.getValueAt(tblPinjamanSaya.getSelectedRow(), 0).toString()+"'";
         
+            // Eksekusi query
             int baris = stmt.executeUpdate(sql);
             
             if(baris > 0 ) {
                 JOptionPane.showMessageDialog(null, "Peminjaman berhasil dikembalikan!");
-                load_data();
+                load_pinjaman_saya();
             } else {
                 JOptionPane.showMessageDialog(null, "Peminjaman gagal dikembalikan!");
             }
@@ -194,6 +203,7 @@ public class formPinjamanSaya extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnKembalikanBukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembalikanBukuActionPerformed
+        // Konfirmasi kembalikan buku
         int kembali = JOptionPane.showOptionDialog(this, 
                 "Anda yakin mengembalikan buku ini?", null, JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE, null, null, null);
@@ -208,7 +218,7 @@ public class formPinjamanSaya extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnKembaliActionPerformed
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
-        load_data();
+        load_pinjaman_saya();
     }//GEN-LAST:event_btnRefreshActionPerformed
 
 

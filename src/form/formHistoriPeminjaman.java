@@ -5,11 +5,18 @@
  */
 package form;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import perpustakaan.Koneksi;
 
 /**
@@ -24,22 +31,30 @@ public class formHistoriPeminjaman extends javax.swing.JInternalFrame {
     public formHistoriPeminjaman() {
         initComponents();
         
-        load_data_peminjaman();
+        // Memuat data histori peminjaman berdasarkan anggota yang login
+        load_histori_peminjaman();
     }
     
-    public void load_data_peminjaman() {
+    public void load_histori_peminjaman() {
+        
+        // Koneksi ke database
         Connection kon = Koneksi.koneksiDB();
         
         // Nama header tabel
         Object tableHeader[] = {"ID PEMINJAMAN", "NAMA PEMINJAM", "JUDUL BUKU", "PENULIS", "TANGGAL PINJAM", "TANGGAL KEMBALI", "STATUS"};
         DefaultTableModel data = new DefaultTableModel(null, tableHeader);
         
+        // Tambahkan data ke tabel 
         tblHistoriPeminjaman.setModel(data);
         
         try {
+            
+            // Mempersiapkan statement
             Statement stmt = kon.createStatement();
 
-            String sql = "SELECT detail_peminjaman.id_peminjaman, nama_anggota, judul_buku, penulis, tanggal_pinjam, tanggal_kembali, detail_peminjaman.status "
+            // Query sql
+            String sql = "SELECT detail_peminjaman.id_peminjaman, nama_anggota, judul_buku, penulis, "
+                    + "tanggal_pinjam, tanggal_kembali, detail_peminjaman.status "
                     + "FROM detail_peminjaman "
                     + "INNER JOIN buku ON detail_peminjaman.id_buku = buku.id_buku "
                     + "INNER JOIN peminjaman ON detail_peminjaman.id_peminjaman = peminjaman.id_peminjaman "
@@ -47,8 +62,10 @@ public class formHistoriPeminjaman extends javax.swing.JInternalFrame {
                     + "WHERE anggota.id_anggota = '"+formLoginAnggota.getId()
                     + "' ORDER BY detail_peminjaman.id_peminjaman";
             
+            // Eksekusi query ke database dan menyimpan hasilnya
             ResultSet rs = stmt.executeQuery(sql);
             
+            // Selama data ada masukkan data pada database ke tabel
             while(rs.next()) {
                 String id_peminjaman = rs.getString(1);
                 String nama_anggota = rs.getString(2);
@@ -67,7 +84,10 @@ public class formHistoriPeminjaman extends javax.swing.JInternalFrame {
         }
     }
     
-    public void load_data_filter(String stat) {
+    // Method untuk memuat data ke tabel berdasarkan statusnya ( filter )
+    public void load_histori_status(String stat) {
+        
+        // Koneksi ke database
         Connection kon = Koneksi.koneksiDB();
         
         // Nama header tabel
@@ -77,9 +97,13 @@ public class formHistoriPeminjaman extends javax.swing.JInternalFrame {
         tblHistoriPeminjaman.setModel(data);
         
         try {
+            
+            // Mempersiapkan statement
             Statement stmt = kon.createStatement();
 
-            String sql = "SELECT detail_peminjaman.id_peminjaman, nama_anggota, judul_buku, penulis, tanggal_pinjam, tanggal_kembali, detail_peminjaman.status "
+            // Query sql
+            String sql = "SELECT detail_peminjaman.id_peminjaman, nama_anggota, judul_buku, penulis, "
+                    + "tanggal_pinjam, tanggal_kembali, detail_peminjaman.status "
                     + "FROM detail_peminjaman "
                     + "INNER JOIN buku ON detail_peminjaman.id_buku = buku.id_buku "
                     + "INNER JOIN peminjaman ON detail_peminjaman.id_peminjaman = peminjaman.id_peminjaman "
@@ -88,8 +112,10 @@ public class formHistoriPeminjaman extends javax.swing.JInternalFrame {
                     + "'AND detail_peminjaman.status = '"+stat+"'"
                     + "ORDER BY detail_peminjaman.id_peminjaman";
             
+            // Mengeksekusi query dan menyimpan data hasil query
             ResultSet rs = stmt.executeQuery(sql);
             
+            // Selama data hasil query ada, masukkan data ke tabel
             while(rs.next()) {
                 String id_peminjaman = rs.getString(1);
                 String nama_anggota = rs.getString(2);
@@ -108,7 +134,9 @@ public class formHistoriPeminjaman extends javax.swing.JInternalFrame {
         }
     }
     
-    public void cari_data() {
+    public void cari_data_histori() {
+        
+        // Koneksi ke database
         Connection kon = Koneksi.koneksiDB();
         
         // Nama header tabel
@@ -118,9 +146,13 @@ public class formHistoriPeminjaman extends javax.swing.JInternalFrame {
         tblHistoriPeminjaman.setModel(data);
         
         try {
+            
+            // Mempersiapkan statement
             Statement stmt = kon.createStatement();
 
-            String sql = "SELECT detail_peminjaman.id_peminjaman, nama_anggota, judul_buku, penulis, tanggal_pinjam, tanggal_kembali, detail_peminjaman.status "
+            // Query sql
+            String sql = "SELECT detail_peminjaman.id_peminjaman, nama_anggota, judul_buku, penulis,"
+                    + " tanggal_pinjam, tanggal_kembali, detail_peminjaman.status "
                     + "FROM detail_peminjaman "
                     + "INNER JOIN buku ON detail_peminjaman.id_buku = buku.id_buku "
                     + "INNER JOIN peminjaman ON detail_peminjaman.id_peminjaman = peminjaman.id_peminjaman "
@@ -129,8 +161,10 @@ public class formHistoriPeminjaman extends javax.swing.JInternalFrame {
                     + "AND anggota.id_anggota = '"+formLoginAnggota.getId()+"'"
                     + "ORDER BY detail_peminjaman.id_peminjaman";
             
+            // Eksekusi query dan menyimpan data hasil query
             ResultSet rs = stmt.executeQuery(sql);
             
+            // Selama data ada, tambahkan data hasil query ke tabel
             while(rs.next()) {
                 String id_peminjaman = rs.getString(1);
                 String nama_anggota = rs.getString(2);
@@ -168,7 +202,7 @@ public class formHistoriPeminjaman extends javax.swing.JInternalFrame {
         txtCariBuku = new javax.swing.JTextField();
         btnCari = new javax.swing.JButton();
         btnKembali = new javax.swing.JButton();
-        btnPrint = new javax.swing.JButton();
+        btnPrintHistori = new javax.swing.JButton();
 
         setOpaque(false);
         setPreferredSize(new java.awt.Dimension(1366, 632));
@@ -233,7 +267,12 @@ public class formHistoriPeminjaman extends javax.swing.JInternalFrame {
             }
         });
 
-        btnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/print.png"))); // NOI18N
+        btnPrintHistori.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/print.png"))); // NOI18N
+        btnPrintHistori.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrintHistoriActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -249,7 +288,7 @@ public class formHistoriPeminjaman extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDikembalikan)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 333, Short.MAX_VALUE)
-                        .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnPrintHistori, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtCariBuku, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -282,7 +321,7 @@ public class formHistoriPeminjaman extends javax.swing.JInternalFrame {
                         .addComponent(btnDipinjam, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnSemua, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtCariBuku, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnPrintHistori, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
@@ -292,15 +331,15 @@ public class formHistoriPeminjaman extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSemuaActionPerformed
-        load_data_peminjaman();
+        load_histori_peminjaman();
     }//GEN-LAST:event_btnSemuaActionPerformed
 
     private void btnDipinjamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDipinjamActionPerformed
-        load_data_filter("DIPINJAM");
+        load_histori_status("DIPINJAM");
     }//GEN-LAST:event_btnDipinjamActionPerformed
 
     private void btnDikembalikanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDikembalikanActionPerformed
-        load_data_filter("DIKEMBALIKAN");
+        load_histori_status("DIKEMBALIKAN");
     }//GEN-LAST:event_btnDikembalikanActionPerformed
 
     private void txtCariBukuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCariBukuMouseClicked
@@ -308,12 +347,43 @@ public class formHistoriPeminjaman extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtCariBukuMouseClicked
 
     private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
-        cari_data();
+        cari_data_histori();
     }//GEN-LAST:event_btnCariActionPerformed
 
     private void btnKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembaliActionPerformed
+        // Tombol kembali ke halaman anggota utama
         this.dispose();
     }//GEN-LAST:event_btnKembaliActionPerformed
+
+    private void btnPrintHistoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintHistoriActionPerformed
+        
+        // Koneksi ke database
+        Connection kon = Koneksi.koneksiDB();
+        
+        try {
+                
+            // Parameter 
+            HashMap param = new HashMap();
+            
+            // Menambahkan parameter ke dalam query
+            param.put("id", formLoginAnggota.getId());
+
+            // Menyimpan file laporan
+            File file = new File("src/laporan/histori/laporanHistoriPeminjaman.jasper");
+            
+            // Load report data file laporan
+            JasperReport report = (JasperReport)JRLoader.loadObject(file);
+            
+            // Tampilkan hasil laporan
+            JasperPrint reportPrint = JasperFillManager.fillReport(report, param, kon);
+            JasperViewer.viewReport(reportPrint, false);
+            JasperViewer.setDefaultLookAndFeelDecorated(true);
+            
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            e.printStackTrace();
+        } 
+    }//GEN-LAST:event_btnPrintHistoriActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -321,7 +391,7 @@ public class formHistoriPeminjaman extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnDikembalikan;
     private javax.swing.JButton btnDipinjam;
     private javax.swing.JButton btnKembali;
-    private javax.swing.JButton btnPrint;
+    private javax.swing.JButton btnPrintHistori;
     private javax.swing.JButton btnSemua;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

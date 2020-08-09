@@ -24,7 +24,7 @@ public class Koneksi {
             Connection koneksi = DriverManager.getConnection("jdbc:mysql://localhost/db10118322Perpustakaan", "root", "");
             return koneksi;
         } catch(Exception e) {
-            JOptionPane.showMessageDialog(null, "Gagal Koneksi Ke Database");
+            JOptionPane.showMessageDialog(null, "Gagal Koneksi Ke Database" + e);
             return null;
         }
     } 

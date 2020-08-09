@@ -24,49 +24,65 @@ public class formKoleksiBuku extends javax.swing.JInternalFrame {
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     Date date = new Date();
     
+    // Mendapatkan tanggal sekarang
     String tanggalSekarang = dateFormat.format(date);
+    
     /**
      * Creates new form formKoleksiBuku
      */
     public formKoleksiBuku() {
         initComponents();
         
-        load_data();
+        load_koleksi_buku();
         btnPinjam.setEnabled(false);
     }
     
+    // Method untuk menentukan tanggal kembali peminjaman
     private String set_tanggal_kembali() {
-         
+        
         Calendar cal = Calendar.getInstance();
+        
+        // Set variabel cal ke tanggal sekarang
         cal.setTime(date);
+        
+        // Set variabel cal menjadi 5 hari kedepan dari tanggal sekarang
         cal.add(Calendar.DATE, 5);
 
+        // Mendapatkan tanggal kembali
         Date expirationDate = cal.getTime();
         
-        String kembali = dateFormat.format(expirationDate);
+        // Format tanggal ke string
+        String tanggal_kembali = dateFormat.format(expirationDate);
 
-        return kembali;
+        // Kembalikan nilai tanggal_kembali
+        return tanggal_kembali;
     }
     
+    // Mendapatkan id_peeminjaman
     private int getID() {
         
+        // Koneksi ke database
         Connection kon = Koneksi.koneksiDB();
         
         try {
-            int no=0;
+                // Set no / id ke 0
+                int no=0;
                 
+                // Mempersiapkan statement
                 Statement stmt = kon.createStatement();
                 
+                // Query sql
                 String sql = "SELECT COUNT(*) as id_peminjaman from peminjaman ";
                 
+                // Mengeksekusi query sql
                 ResultSet rs = stmt.executeQuery(sql);
 
+                // Tambahkan no + 1;
                 if (rs.next()) {
                     no = rs.getInt("id_peminjaman") + 1;
                 }
 
-                rs.close();
-
+                // Kembalikan nilai no
                 return no;
 
         } catch (Exception e) {
@@ -75,7 +91,8 @@ public class formKoleksiBuku extends javax.swing.JInternalFrame {
         }
     }
     
-    private void load_data() {
+    private void load_koleksi_buku() {
+        
         // Koneksi ke database
         Connection kon = Koneksi.koneksiDB();
         
@@ -121,8 +138,10 @@ public class formKoleksiBuku extends javax.swing.JInternalFrame {
         }
     }
     
-    private void load_data_cari() {
-         // Koneksi ke database
+    // Method untuk menampilkan data hasil pencarian
+    private void cari_koleksi_buku() {
+        
+        // Koneksi ke database
        Connection kon = Koneksi.koneksiDB();
 
        // Nama header tabel
@@ -159,24 +178,27 @@ public class formKoleksiBuku extends javax.swing.JInternalFrame {
                data.addRow(d);
            } 
            
+           // Eksekusi query kedua
            ResultSet rs2 = stmt.executeQuery(sql);
            
+           // Jika query kedua tidak ada datanya tampilkan pesan
            if(!rs2.next()) {
                JOptionPane.showMessageDialog(null, "Data tidak ditemukan!");
-               load_data();
+               load_koleksi_buku();
            }
        } catch(Exception e) {
            JOptionPane.showMessageDialog(null, e);
-           load_data();
+           load_koleksi_buku();
        }
     }
     
+    // Method untuk pinjam buku dari menu koleksi buku
     private void pinjam_buku() {
+        
+        // Koneksi ke database
         Connection kon = Koneksi.koneksiDB();
         
         try {
-            
-            //Variabel Input
             
             // Mendapatkan baris yang dipilih 
             int baris = tblKoleksiBuku.getSelectedRow();
@@ -187,16 +209,20 @@ public class formKoleksiBuku extends javax.swing.JInternalFrame {
             String tanggal_pinjam = tanggalSekarang;
             String tanggal_kembali = set_tanggal_kembali();
             
+            // Mempersiapkan statement
             Statement stmt = kon.createStatement();
             
+            // Query sql pertama
             String sql = "INSERT INTO peminjaman VALUES (default, '"+formLoginAnggota.getId()+"')";
-                    
+                 
+            // Query sql kedua
             String sql2 = "INSERT INTO detail_peminjaman "
                     + " VALUES ('"+id_peminjaman+"','"+id_buku
                     +"','"+tanggal_pinjam
                     +"','"+tanggal_kembali
                     +"', 'DIPINJAM');";
             
+            // Eksekusi query pertama dan kedua
             int baris1 = stmt.executeUpdate(sql);
             int baris2 = stmt.executeUpdate(sql2);
             
@@ -207,7 +233,6 @@ public class formKoleksiBuku extends javax.swing.JInternalFrame {
             }
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, e);
-            
         }
 
     }
@@ -347,7 +372,7 @@ public class formKoleksiBuku extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
-        load_data_cari();
+        cari_koleksi_buku();
     }//GEN-LAST:event_btnCariActionPerformed
 
     private void txtCariMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCariMouseClicked
@@ -359,10 +384,12 @@ public class formKoleksiBuku extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnKembaliActionPerformed
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
-        load_data();
+        load_koleksi_buku();
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void btnPinjamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPinjamActionPerformed
+        
+        // Konfirmasi pinjam buku
         int pinjam = JOptionPane.showOptionDialog(this, 
                 "Anda yakin pinjam buku ini?", null, JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE, null, null, null);

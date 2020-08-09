@@ -8,7 +8,7 @@ package form;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import perpustakaan.MenuLogin;
+import perpustakaan.menuLogin;
 
 /**
  *
@@ -205,7 +205,7 @@ public class formUtamaAdmin extends javax.swing.JFrame {
 
     private void menuLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLogoutActionPerformed
         // Instance menu login
-        MenuLogin menuLogin = new MenuLogin();
+        menuLogin menuLogin = new menuLogin();
         
         // Tampilkan menu login utama
         menuLogin.setVisible(true);
@@ -278,17 +278,17 @@ public class formUtamaAdmin extends javax.swing.JFrame {
         panelUtama.removeAll();
         panelUtama.repaint();
         
-        // Instance class form kelola buku
+        // Instance class form kelola anggota
         formKelolaAnggota kelolaAnggota = new formKelolaAnggota();
         
-        // Mengambil ukuran layar utama dan layar form kelola buku
+        // Mengambil ukuran layar utama dan layar form kelola anggota
         Dimension layarUtama = this.getSize();
         Dimension layarKelolaAnggota = kelolaAnggota.getSize();
         
-        // Set posisi form kelola buku ke center
+        // Set posisi form kelola anggota ke center
         kelolaAnggota.setLocation((layarUtama.width - layarKelolaAnggota.width)/2, (layarUtama.height - layarKelolaAnggota.height)/4);
         
-        // Menambahkan halaman form kelola buku di panel utama
+        // Menambahkan halaman form kelola anggota di panel utama
         panelUtama.add(kelolaAnggota);
         kelolaAnggota.setVisible(true);
         
@@ -305,17 +305,17 @@ public class formUtamaAdmin extends javax.swing.JFrame {
         panelUtama.removeAll();
         panelUtama.repaint();
         
-        // Instance class form kelola buku
+        // Instance class form kelola anggota
         formKelolaAnggota kelolaAnggota = new formKelolaAnggota();
         
-        // Mengambil ukuran layar utama dan layar form kelola buku
+        // Mengambil ukuran layar utama dan layar form kelola anggota
         Dimension layarUtama = this.getSize();
         Dimension layarKelolaAnggota = kelolaAnggota.getSize();
         
-        // Set posisi form kelola buku ke center
+        // Set posisi form kelola anggota ke center
         kelolaAnggota.setLocation((layarUtama.width - layarKelolaAnggota.width)/2, (layarUtama.height - layarKelolaAnggota.height)/4);
         
-        // Menambahkan halaman form kelola buku di panel utama
+        // Menambahkan halaman form kelola anggota di panel utama
         panelUtama.add(kelolaAnggota);
         kelolaAnggota.setVisible(true);
         
@@ -328,7 +328,7 @@ public class formUtamaAdmin extends javax.swing.JFrame {
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         // Instance menu login
-        MenuLogin menuLogin = new MenuLogin();
+        menuLogin menuLogin = new menuLogin();
         
         // Tampilkan menu login utama
         menuLogin.setVisible(true);
@@ -347,17 +347,17 @@ public class formUtamaAdmin extends javax.swing.JFrame {
         panelUtama.removeAll();
         panelUtama.repaint();
         
-        // Instance class form kelola buku
+        // Instance class form kelola peminjaman
         formKelolaPeminjaman kelolaPeminjaman = new formKelolaPeminjaman();
         
-        // Mengambil ukuran layar utama dan layar form kelola buku
+        // Mengambil ukuran layar utama dan layar form kelola peminjaman
         Dimension layarUtama = this.getSize();
         Dimension layarKelolaPeminjaman = kelolaPeminjaman.getSize();
         
-        // Set posisi form kelola buku ke center
+        // Set posisi form kelola peminjaman ke center
         kelolaPeminjaman.setLocation((layarUtama.width - layarKelolaPeminjaman.width)/2, (layarUtama.height - layarKelolaPeminjaman.height)/4);
         
-        // Menambahkan halaman form kelola buku di panel utama
+        // Menambahkan halaman form kelola peminjaman di panel utama
         panelUtama.add(kelolaPeminjaman);
         kelolaPeminjaman.setVisible(true);
         
@@ -374,17 +374,17 @@ public class formUtamaAdmin extends javax.swing.JFrame {
         panelUtama.removeAll();
         panelUtama.repaint();
         
-        // Instance class form kelola buku
+        // Instance class form kelola peminjaman
         formKelolaPeminjaman kelolaPeminjaman = new formKelolaPeminjaman();
         
-        // Mengambil ukuran layar utama dan layar form kelola buku
+        // Mengambil ukuran layar utama dan layar form kelola peminjaman
         Dimension layarUtama = this.getSize();
         Dimension layarKelolaPeminjaman = kelolaPeminjaman.getSize();
         
-        // Set posisi form kelola buku ke center
+        // Set posisi form kelola peminjaman ke center
         kelolaPeminjaman.setLocation((layarUtama.width - layarKelolaPeminjaman.width)/2, (layarUtama.height - layarKelolaPeminjaman.height)/4);
         
-        // Menambahkan halaman form kelola buku di panel utama
+        // Menambahkan halaman form kelola peminjaman di panel utama
         panelUtama.add(kelolaPeminjaman);
         kelolaPeminjaman.setVisible(true);
         

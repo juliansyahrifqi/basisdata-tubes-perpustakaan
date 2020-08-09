@@ -5,11 +5,18 @@
  */
 package form;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import perpustakaan.Koneksi;
 
 /**
@@ -23,13 +30,15 @@ public class formKelolaAnggota extends javax.swing.JInternalFrame {
      */
     public formKelolaAnggota() {
         initComponents();
-        load_data();
+        load_data_anggota();
         
         // Btn hapus dinonaktifkan
         btnHapus.setEnabled(false);
     }
     
-    private void load_data() {
+    // Method untuk menampilkan data anggota
+    private void load_data_anggota() {
+        
         // Koneksi ke database
         Connection kon = Koneksi.koneksiDB();
         
@@ -72,7 +81,8 @@ public class formKelolaAnggota extends javax.swing.JInternalFrame {
         }
     }
     
-    private void load_data_status(String stat) {
+    // Method untuk menampilkan data anggota berdasarkan statusnya ( filter )
+    private void load_anggota_filter(String stat) {
         
         // Mempersiapkan koneksi
         Connection kon = Koneksi.koneksiDB();
@@ -110,10 +120,11 @@ public class formKelolaAnggota extends javax.swing.JInternalFrame {
             
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, "Error: "+e);
-            load_data();
+            load_data_anggota();
         }
     }
     
+    // Method untuk menampilkan data anggota yang dicari
     private void load_data_cari() {
         
         // Koneksi ke database
@@ -157,16 +168,18 @@ public class formKelolaAnggota extends javax.swing.JInternalFrame {
             // Jika data tidak ada
             if(!rs2.next()) {
                 JOptionPane.showMessageDialog(null, "Data tidak ditemukan");
-                load_data();
+                load_data_anggota();
             }
             
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, "Error: "+e);
-            load_data();
+            load_data_anggota();
         }
     }
     
+    // Method untuk hapus data ( oleh admin )
     private void hapus_data() {
+        
         // Koneksi ke database
         Connection kon = Koneksi.koneksiDB();
         
@@ -176,7 +189,8 @@ public class formKelolaAnggota extends javax.swing.JInternalFrame {
             Statement stmt = kon.createStatement();
             
             // Query sql
-            String sql = "UPDATE anggota SET status = 'TIDAK AKTIF' WHERE id_anggota = '"+tblAnggota.getValueAt(tblAnggota.getSelectedRow(), 0).toString()+"'";
+            String sql = "UPDATE anggota SET status = 'TIDAK AKTIF' "
+                    + "WHERE id_anggota = '"+tblAnggota.getValueAt(tblAnggota.getSelectedRow(), 0).toString()+"'";
             // Eksekusi query ke database
             int baris = stmt.executeUpdate(sql);
             
@@ -212,7 +226,7 @@ public class formKelolaAnggota extends javax.swing.JInternalFrame {
         btnSemua = new javax.swing.JButton();
         txtCari = new javax.swing.JTextField();
         btnCari = new javax.swing.JButton();
-        btnPrint = new javax.swing.JButton();
+        btnPrintAnggota = new javax.swing.JButton();
         btnKembali = new javax.swing.JButton();
         btnRefresh = new javax.swing.JButton();
 
@@ -284,7 +298,12 @@ public class formKelolaAnggota extends javax.swing.JInternalFrame {
             }
         });
 
-        btnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/print.png"))); // NOI18N
+        btnPrintAnggota.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/print.png"))); // NOI18N
+        btnPrintAnggota.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrintAnggotaActionPerformed(evt);
+            }
+        });
 
         btnKembali.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btnKembali.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/back.png"))); // NOI18N
@@ -319,7 +338,7 @@ public class formKelolaAnggota extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnNonaktif)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnPrintAnggota, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -355,7 +374,7 @@ public class formKelolaAnggota extends javax.swing.JInternalFrame {
                         .addComponent(btnAktif, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnNonaktif, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnPrintAnggota, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnCari, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -371,43 +390,50 @@ public class formKelolaAnggota extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblAnggotaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAnggotaMouseClicked
-        // TODO add your handling code here:
+
         // Mendapatkan baris yang dipilih     
         // Tombol tambah data dimatikan
         btnHapus.setEnabled(true);
     }//GEN-LAST:event_tblAnggotaMouseClicked
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
+        // Konfirmasi hapus
+        
         int hapus = JOptionPane.showOptionDialog(this, 
                 "Apakah anda yakin untuk menghapus data ini ?", null, JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE, null, null, null);
         
         if(hapus == JOptionPane.YES_OPTION) {
             hapus_data();
-            load_data();
+            load_data_anggota();
             btnHapus.setEnabled(false);
         }
     }//GEN-LAST:event_btnHapusActionPerformed
 
     private void btnAktifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAktifActionPerformed
-        // TODO add your handling code here:
-        load_data_status("AKTIF");
+        
+        // Load data yang statusnya aktif
+        load_anggota_filter("AKTIF");
     }//GEN-LAST:event_btnAktifActionPerformed
 
     private void btnSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSemuaActionPerformed
-        // TODO add your handling code here:
-        load_data();
+        
+        // Load semua data anggota
+        load_data_anggota();
     }//GEN-LAST:event_btnSemuaActionPerformed
 
     private void btnNonaktifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNonaktifActionPerformed
-        load_data_status("TIDAK AKTIF");
+        // Load data anggota yang statusnya nonaktif
+        load_anggota_filter("TIDAK AKTIF");
     }//GEN-LAST:event_btnNonaktifActionPerformed
 
     private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
+        // Load data yang dicari
         load_data_cari();
     }//GEN-LAST:event_btnCariActionPerformed
 
     private void btnKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembaliActionPerformed
+        // Close internalframe dan kembali ke menu admin utama
         this.dispose();
     }//GEN-LAST:event_btnKembaliActionPerformed
 
@@ -416,8 +442,35 @@ public class formKelolaAnggota extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtCariMouseClicked
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
-        load_data();
+        // Refresh data anggota
+        load_data_anggota();
     }//GEN-LAST:event_btnRefreshActionPerformed
+
+    private void btnPrintAnggotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintAnggotaActionPerformed
+        
+        // Koneksi ke database
+        Connection kon = Koneksi.koneksiDB();
+        
+        try {
+            
+            // Parameter
+            HashMap param = new HashMap();
+
+            // Mengambil file
+            File file = new File("src/laporan/anggota/laporanAnggota.jasper");
+            
+            // Load object file
+            JasperReport report = (JasperReport)JRLoader.loadObject(file);
+            
+            // Tampilkan object file
+            JasperPrint reportPrint = JasperFillManager.fillReport(report, param, kon);
+            JasperViewer.viewReport(reportPrint, false);
+            JasperViewer.setDefaultLookAndFeelDecorated(true);
+            
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        } 
+    }//GEN-LAST:event_btnPrintAnggotaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -426,7 +479,7 @@ public class formKelolaAnggota extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnHapus;
     private javax.swing.JButton btnKembali;
     private javax.swing.JButton btnNonaktif;
-    private javax.swing.JButton btnPrint;
+    private javax.swing.JButton btnPrintAnggota;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnSemua;
     private javax.swing.JLabel jLabel2;

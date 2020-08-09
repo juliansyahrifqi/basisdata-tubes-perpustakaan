@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import perpustakaan.Koneksi;
-import perpustakaan.MenuLogin;
+import perpustakaan.menuLogin;
 
 /**
  *
@@ -31,7 +31,7 @@ public class formLoginAnggota extends javax.swing.JFrame {
         txtUsername.requestFocus();
     }
     
-    public void cek_login() {
+    public void do_login() {
         
         // Koneksi ke database
         Connection kon = Koneksi.koneksiDB();
@@ -185,14 +185,14 @@ public class formLoginAnggota extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Password Wajib Diisi!");
             txtPassword.requestFocus();
         } else {
-            cek_login();
+            do_login();
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembaliActionPerformed
-        // TODO add your handling code here:
-        
-        MenuLogin menuLogin = new MenuLogin();
+       
+        // Kembali ke menu login
+        menuLogin menuLogin = new menuLogin();
         
         menuLogin.setVisible(true);
         this.dispose();
