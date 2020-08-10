@@ -9,12 +9,12 @@ package form;
  *
  * @author oyeaaa
  */
-public class formTentangKita extends javax.swing.JInternalFrame {
+public class formTentangKami extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form formTentangKita
      */
-    public formTentangKita() {
+    public formTentangKami() {
         initComponents();
     }
 
@@ -94,6 +94,11 @@ public class formTentangKita extends javax.swing.JInternalFrame {
         lblNimRafi.setText("10118328");
 
         btnKembali.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/back.png"))); // NOI18N
+        btnKembali.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKembaliActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -178,6 +183,10 @@ public class formTentangKita extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembaliActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnKembaliActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

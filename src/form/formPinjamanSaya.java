@@ -25,6 +25,7 @@ public class formPinjamanSaya extends javax.swing.JInternalFrame {
         initComponents();
         
         load_pinjaman_saya();
+        btnKembalikanBuku.setEnabled(false);
     }
     
     private void load_pinjaman_saya() {
@@ -137,6 +138,11 @@ public class formPinjamanSaya extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblPinjamanSaya.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblPinjamanSayaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblPinjamanSaya);
 
         btnKembali.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/back.png"))); // NOI18N
@@ -219,7 +225,12 @@ public class formPinjamanSaya extends javax.swing.JInternalFrame {
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         load_pinjaman_saya();
+        btnKembalikanBuku.setEnabled(false);
     }//GEN-LAST:event_btnRefreshActionPerformed
+
+    private void tblPinjamanSayaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPinjamanSayaMouseClicked
+        btnKembalikanBuku.setEnabled(true);
+    }//GEN-LAST:event_tblPinjamanSayaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

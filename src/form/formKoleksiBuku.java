@@ -385,6 +385,7 @@ public class formKoleksiBuku extends javax.swing.JInternalFrame {
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         load_koleksi_buku();
+        btnPinjam.setEnabled(false);
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void btnPinjamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPinjamActionPerformed

@@ -6,6 +6,7 @@
 package form;
 
 import java.io.File;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -178,6 +179,15 @@ public class formHistoriPeminjaman extends javax.swing.JInternalFrame {
                 String d[] = {id_peminjaman, nama_anggota, judul_buku, penulis, tanggal_pinjam, tanggal_kembali, status};
                 data.addRow(d);
             }
+            
+            // Eksekusi query kedua
+           ResultSet rs2 = stmt.executeQuery(sql);
+           
+           // Jika query kedua tidak ada datanya tampilkan pesan
+           if(!rs2.next()) {
+               JOptionPane.showMessageDialog(null, "Data tidak ditemukan!");
+               load_histori_peminjaman();
+           }
         }catch(Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -361,24 +371,23 @@ public class formHistoriPeminjaman extends javax.swing.JInternalFrame {
         Connection kon = Koneksi.koneksiDB();
         
         try {
-                
-            // Parameter 
-            HashMap param = new HashMap();
+               
+            // Mendapatkan path dari file laporan
+            String laporanDir = "/laporan/histori/laporanHistoriPeminjaman.jasper"; 
+
+            InputStream fileLaporan = null;
+            fileLaporan = getClass().getResourceAsStream(laporanDir);
+
+            // Parameter
+            HashMap param = new HashMap(); 
             
-            // Menambahkan parameter ke dalam query
+            // Tambahkan parameter id_anggota
             param.put("id", formLoginAnggota.getId());
 
-            // Menyimpan file laporan
-            File file = new File("src/laporan/histori/laporanHistoriPeminjaman.jasper");
-            
-            // Load report data file laporan
-            JasperReport report = (JasperReport)JRLoader.loadObject(file);
-            
-            // Tampilkan hasil laporan
-            JasperPrint reportPrint = JasperFillManager.fillReport(report, param, kon);
-            JasperViewer.viewReport(reportPrint, false);
+            JasperPrint print = JasperFillManager.fillReport(fileLaporan, param, kon);
+            JasperViewer.viewReport(print, false);
             JasperViewer.setDefaultLookAndFeelDecorated(true);
-            
+         
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, e);
             e.printStackTrace();

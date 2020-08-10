@@ -6,6 +6,7 @@
 package form;
 
 import java.io.File;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -170,6 +171,15 @@ public class formKelolaPeminjaman extends javax.swing.JInternalFrame {
                 String d[] = {id_peminjaman, nama_anggota, judul_buku, penulis, tanggal_pinjam, tanggal_kembali, status};
                 data.addRow(d);
             }
+            
+            // Hasil query kedua
+            ResultSet rs2 = stmt.executeQuery(sql);
+           
+           // Jika datanya tidak ada
+           if(!rs2.next()) {
+               JOptionPane.showMessageDialog(null, "Data tidak ditemukan!");
+               load_data_peminjaman();
+           }
         }catch(Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -395,6 +405,7 @@ public class formKelolaPeminjaman extends javax.swing.JInternalFrame {
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         load_data_peminjaman();
+        btnKembalikanBuku.setEnabled(false);
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void txtCariMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCariMouseClicked
@@ -424,18 +435,17 @@ public class formKelolaPeminjaman extends javax.swing.JInternalFrame {
         
         try {
             
-            // Parameter
-            HashMap param = new HashMap();
+            // Mendapatkan path dari file laporan
+            String laporanDir = "/laporan/peminjaman/laporanPeminjaman.jasper"; 
 
-            // Mendapatkan file
-            File file = new File("src/laporan/peminjaman/laporanPeminjaman.jasper");
-            
-            // Meload objek file
-            JasperReport report = (JasperReport)JRLoader.loadObject(file);
-            
-            // Menampilkan objek file
-            JasperPrint reportPrint = JasperFillManager.fillReport(report, param, kon);
-            JasperViewer.viewReport(reportPrint, false);
+            InputStream fileLaporan = null;
+            fileLaporan = getClass().getResourceAsStream(laporanDir);
+
+            // Parameter
+            HashMap param = new HashMap(); 
+
+            JasperPrint print = JasperFillManager.fillReport(fileLaporan, param, kon);
+            JasperViewer.viewReport(print, false);
             JasperViewer.setDefaultLookAndFeelDecorated(true);
             
         } catch(Exception e) {

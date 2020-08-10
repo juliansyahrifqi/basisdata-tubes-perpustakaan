@@ -6,6 +6,7 @@
 package form;
 
 import java.io.File;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -444,6 +445,7 @@ public class formKelolaAnggota extends javax.swing.JInternalFrame {
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         // Refresh data anggota
         load_data_anggota();
+        btnHapus.setEnabled(false);
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void btnPrintAnggotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintAnggotaActionPerformed
@@ -453,18 +455,17 @@ public class formKelolaAnggota extends javax.swing.JInternalFrame {
         
         try {
             
-            // Parameter
-            HashMap param = new HashMap();
+            // Mendapatkan path dari file laporan
+            String laporanDir = "/laporan/anggota/laporanAnggota.jasper"; 
 
-            // Mengambil file
-            File file = new File("src/laporan/anggota/laporanAnggota.jasper");
-            
-            // Load object file
-            JasperReport report = (JasperReport)JRLoader.loadObject(file);
-            
-            // Tampilkan object file
-            JasperPrint reportPrint = JasperFillManager.fillReport(report, param, kon);
-            JasperViewer.viewReport(reportPrint, false);
+            InputStream fileLaporan = null;
+            fileLaporan = getClass().getResourceAsStream(laporanDir);
+
+            // Parameter
+            HashMap param = new HashMap(); 
+
+            JasperPrint print = JasperFillManager.fillReport(fileLaporan, param, kon);
+            JasperViewer.viewReport(print, false);
             JasperViewer.setDefaultLookAndFeelDecorated(true);
             
         } catch(Exception e) {

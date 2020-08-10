@@ -407,7 +407,7 @@ public class formUtamaAdmin extends javax.swing.JFrame {
         panelUtama.repaint();
         
         // Instance class form kelola peminjaman
-        formTentangKita tentangKita = new formTentangKita();
+        formTentangKami tentangKita = new formTentangKami();
         
         // Mengambil ukuran layar utama dan layar form kelola peminjaman
         Dimension layarUtama = this.getSize();

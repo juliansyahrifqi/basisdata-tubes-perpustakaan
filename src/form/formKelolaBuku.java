@@ -6,6 +6,7 @@
 package form;
 
 import java.io.File;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.util.Date;
 import java.sql.ResultSet;
@@ -803,6 +804,9 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         clear_data();
+        btnEdit.setEnabled(false);
+        btnHapus.setEnabled(false);
+        btnTambah.setEnabled(true);
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void btnPrintBukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintBukuActionPerformed
@@ -812,21 +816,19 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
         Connection kon = Koneksi.koneksiDB();
        
         try {
-            
-            // Parameter
-            HashMap param = new HashMap();
+            // Mendapatkan path dari file laporan
+            String laporanDir = "/laporan/buku/laporanBuku.jasper"; 
 
-            // Mendapatkan file
-            File file = new File("src/laporan/buku/laporanBuku.jasper");
-            
-            // Load objek file
-            JasperReport report = (JasperReport)JRLoader.loadObject(file);
-            
-            // Menampilkan objek file
-            JasperPrint reportPrint = JasperFillManager.fillReport(report, param, kon);
-            JasperViewer.viewReport(reportPrint, false);
+            InputStream fileLaporan = null;
+            fileLaporan = getClass().getResourceAsStream(laporanDir);
+
+            // Parameter
+            HashMap param = new HashMap(); 
+
+            JasperPrint print = JasperFillManager.fillReport(fileLaporan, param, kon);
+            JasperViewer.viewReport(print, false);
             JasperViewer.setDefaultLookAndFeelDecorated(true);
-            
+  
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, e);
             e.printStackTrace();
