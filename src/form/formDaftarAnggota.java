@@ -135,41 +135,41 @@ public class formDaftarAnggota extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lblTitle = new javax.swing.JLabel();
+        lblNamaAnggota = new javax.swing.JLabel();
+        lblNoTlp = new javax.swing.JLabel();
+        lblAlamat = new javax.swing.JLabel();
+        lblUsername = new javax.swing.JLabel();
+        lblPassword = new javax.swing.JLabel();
         txtNama = new javax.swing.JTextField();
         txtNoTlp = new javax.swing.JTextField();
         txtAlamat = new javax.swing.JTextField();
         txtUsername = new javax.swing.JTextField();
+        txtPassword = new javax.swing.JPasswordField();
         btnDaftar = new javax.swing.JButton();
         btnReset = new javax.swing.JButton();
-        txtPassword = new javax.swing.JPasswordField();
         btnKembali = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("DAFTAR ANGGOTA");
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        jLabel1.setText("DAFTAR ANGGOTA");
+        lblTitle.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        lblTitle.setText("DAFTAR ANGGOTA");
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel2.setText("Nama Anggota");
+        lblNamaAnggota.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblNamaAnggota.setText("Nama Anggota");
 
-        jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel3.setText("No Telepon");
+        lblNoTlp.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblNoTlp.setText("No Telepon");
 
-        jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel4.setText("Alamat");
+        lblAlamat.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblAlamat.setText("Alamat");
 
-        jLabel5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel5.setText("Username");
+        lblUsername.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblUsername.setText("Username");
 
-        jLabel6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel6.setText("Password");
+        lblPassword.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblPassword.setText("Password");
 
         btnDaftar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnDaftar.setText("DAFTAR");
@@ -210,17 +210,17 @@ public class formDaftarAnggota extends javax.swing.JFrame {
                 .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel6)
-                        .addComponent(jLabel5)
-                        .addComponent(jLabel4)
+                        .addComponent(lblPassword)
+                        .addComponent(lblUsername)
+                        .addComponent(lblAlamat)
                         .addComponent(txtNama)
-                        .addComponent(jLabel2)
-                        .addComponent(jLabel3)
+                        .addComponent(lblNamaAnggota)
+                        .addComponent(lblNoTlp)
                         .addComponent(txtNoTlp)
                         .addComponent(txtAlamat)
                         .addComponent(txtUsername)
                         .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1))
+                    .addComponent(lblTitle))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -229,25 +229,25 @@ public class formDaftarAnggota extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(btnKembali, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
+                .addComponent(lblTitle)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2)
+                .addComponent(lblNamaAnggota)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNama, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel3)
+                .addComponent(lblNoTlp)
                 .addGap(3, 3, 3)
                 .addComponent(txtNoTlp, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel4)
+                .addComponent(lblAlamat)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel5)
+                .addComponent(lblUsername)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel6)
+                .addComponent(lblPassword)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
@@ -328,12 +328,12 @@ public class formDaftarAnggota extends javax.swing.JFrame {
     private javax.swing.JButton btnDaftar;
     private javax.swing.JButton btnKembali;
     private javax.swing.JButton btnReset;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel lblAlamat;
+    private javax.swing.JLabel lblNamaAnggota;
+    private javax.swing.JLabel lblNoTlp;
+    private javax.swing.JLabel lblPassword;
+    private javax.swing.JLabel lblTitle;
+    private javax.swing.JLabel lblUsername;
     private javax.swing.JTextField txtAlamat;
     private javax.swing.JTextField txtNama;
     private javax.swing.JTextField txtNoTlp;

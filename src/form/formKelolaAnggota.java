@@ -217,25 +217,25 @@ public class formKelolaAnggota extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
+        lblTitle = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblAnggota = new javax.swing.JTable();
-        btnHapus = new javax.swing.JButton();
         btnAktif = new javax.swing.JButton();
         btnNonaktif = new javax.swing.JButton();
         btnSemua = new javax.swing.JButton();
+        btnPrintAnggota = new javax.swing.JButton();
         txtCari = new javax.swing.JTextField();
         btnCari = new javax.swing.JButton();
-        btnPrintAnggota = new javax.swing.JButton();
         btnKembali = new javax.swing.JButton();
+        btnHapus = new javax.swing.JButton();
         btnRefresh = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1366, 632));
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("PENGELOLAAN DATA ANGGOTA");
-        jLabel2.setPreferredSize(new java.awt.Dimension(1366, 43));
+        lblTitle.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitle.setText("PENGELOLAAN DATA ANGGOTA");
+        lblTitle.setPreferredSize(new java.awt.Dimension(1366, 43));
 
         tblAnggota.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -254,14 +254,6 @@ public class formKelolaAnggota extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane1.setViewportView(tblAnggota);
-
-        btnHapus.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        btnHapus.setText("HAPUS DATA");
-        btnHapus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHapusActionPerformed(evt);
-            }
-        });
 
         btnAktif.setText("ANGGOTA AKTIF");
         btnAktif.addActionListener(new java.awt.event.ActionListener() {
@@ -284,6 +276,13 @@ public class formKelolaAnggota extends javax.swing.JInternalFrame {
             }
         });
 
+        btnPrintAnggota.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/print.png"))); // NOI18N
+        btnPrintAnggota.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrintAnggotaActionPerformed(evt);
+            }
+        });
+
         txtCari.setText("Cari nama anggota disini");
         txtCari.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -298,18 +297,19 @@ public class formKelolaAnggota extends javax.swing.JInternalFrame {
             }
         });
 
-        btnPrintAnggota.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/print.png"))); // NOI18N
-        btnPrintAnggota.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPrintAnggotaActionPerformed(evt);
-            }
-        });
-
         btnKembali.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btnKembali.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/back.png"))); // NOI18N
         btnKembali.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKembaliActionPerformed(evt);
+            }
+        });
+
+        btnHapus.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btnHapus.setText("HAPUS DATA");
+        btnHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHapusActionPerformed(evt);
             }
         });
 
@@ -348,7 +348,7 @@ public class formKelolaAnggota extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnKembali, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -366,7 +366,7 @@ public class formKelolaAnggota extends javax.swing.JInternalFrame {
                         .addComponent(btnKembali, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -482,8 +482,8 @@ public class formKelolaAnggota extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnPrintAnggota;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnSemua;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblTitle;
     private javax.swing.JTable tblAnggota;
     private javax.swing.JTextField txtCari;
     // End of variables declaration//GEN-END:variables

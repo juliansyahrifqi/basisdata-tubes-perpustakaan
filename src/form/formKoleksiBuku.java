@@ -246,7 +246,7 @@ public class formKoleksiBuku extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        lblTitle = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblKoleksiBuku = new javax.swing.JTable();
         btnPinjam = new javax.swing.JButton();
@@ -258,10 +258,10 @@ public class formKoleksiBuku extends javax.swing.JInternalFrame {
         setTitle("DAFTAR KOLEKSI BUKU PERPUSTAKAAN");
         setPreferredSize(new java.awt.Dimension(1366, 632));
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("DAFTAR KOLEKSI BUKU PERPUSTAKAAN");
-        jLabel1.setPreferredSize(new java.awt.Dimension(1366, 15));
+        lblTitle.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitle.setText("DAFTAR KOLEKSI BUKU PERPUSTAKAAN");
+        lblTitle.setPreferredSize(new java.awt.Dimension(1366, 15));
 
         tblKoleksiBuku.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -345,7 +345,7 @@ public class formKoleksiBuku extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnKembali, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1352, Short.MAX_VALUE))
+                            .addComponent(lblTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1352, Short.MAX_VALUE))
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -354,7 +354,7 @@ public class formKoleksiBuku extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(btnKembali, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -409,8 +409,8 @@ public class formKoleksiBuku extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnKembali;
     private javax.swing.JButton btnPinjam;
     private javax.swing.JButton btnRefresh;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblTitle;
     private javax.swing.JTable tblKoleksiBuku;
     private javax.swing.JTextField txtCari;
     // End of variables declaration//GEN-END:variables

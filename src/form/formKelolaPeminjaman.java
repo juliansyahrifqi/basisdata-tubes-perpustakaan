@@ -216,7 +216,7 @@ public class formKelolaPeminjaman extends javax.swing.JInternalFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblKelolaPeminjaman = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
+        lblTitle = new javax.swing.JLabel();
         btnKembalikanBuku = new javax.swing.JButton();
         btnKembali = new javax.swing.JButton();
         btnRefresh = new javax.swing.JButton();
@@ -247,10 +247,10 @@ public class formKelolaPeminjaman extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tblKelolaPeminjaman);
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("PENGELOLAAN DATA PEMINJAMAN BUKU");
-        jLabel1.setPreferredSize(new java.awt.Dimension(1366, 57));
+        lblTitle.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitle.setText("PENGELOLAAN DATA PEMINJAMAN BUKU");
+        lblTitle.setPreferredSize(new java.awt.Dimension(1366, 57));
 
         btnKembalikanBuku.setText("KEMBALIKAN BUKU");
         btnKembalikanBuku.addActionListener(new java.awt.event.ActionListener() {
@@ -325,7 +325,7 @@ public class formKelolaPeminjaman extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnKembali, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -358,7 +358,7 @@ public class formKelolaPeminjaman extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnKembali, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(51, 51, 51)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -377,8 +377,6 @@ public class formKelolaPeminjaman extends javax.swing.JInternalFrame {
                     .addComponent(btnKembalikanBuku, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
-
-        btnPrintPeminjaman.getAccessibleContext().setAccessibleName("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -456,8 +454,8 @@ public class formKelolaPeminjaman extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnPrintPeminjaman;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnSemua;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblTitle;
     private javax.swing.JTable tblKelolaPeminjaman;
     private javax.swing.JTextField txtCari;
     // End of variables declaration//GEN-END:variables

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 07, 2020 at 05:28 PM
+-- Generation Time: Aug 10, 2020 at 05:22 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.2
 
@@ -49,7 +49,22 @@ INSERT INTO `admin` (`id_admin`, `nama_admin`, `username`, `password`) VALUES
 (7, 'Ardian Samsudin', 'summerblack', 'kotabaru11'),
 (8, 'Fetiana Rahmisyam', 'rahmianafeti12', 'persib1933'),
 (9, 'Rifqi Gates', 'gatesrifqi111', 'micorosoft10'),
-(10, 'Farhan Muhammad', 'muhfarhan12', 'akuganteng12');
+(10, 'Farhan Muhammad', 'muhfarhan12', 'akuganteng12'),
+(11, 'Yanuar Wijaya', 'wijayanuar77', 'indonesiapintar'),
+(12, 'Fauzan Pratama', 'fauzan11', 'kujangbandung'),
+(13, 'Annisa Tantro', 'tannisalisa', 'travelermania11'),
+(14, 'Wanda Simalungun', 'simalungun22', 'simalungunjaya12'),
+(15, 'Marshela Winata', 'mockingbird77', 'flyingbird51'),
+(16, 'Amanda Trintania', 'taniamanda00', 'akusukakucing99'),
+(17, 'Thania Syarifah', 'indonesiakeren', 'jayalahnegeriku'),
+(18, 'Ibnu Nasrul', 'nasrullahibnu', 'duniaimaji44'),
+(19, 'Wiranata Azmi', 'aezakmi22', 'rockismymusic'),
+(20, 'Sarah Afifah', 'sarchu22', 'sarahlucu22'),
+(21, 'Indah Permata', 'bandungindah', 'dancer123'),
+(22, 'Malik Al Hasan', 'hasanalmalik89', 'iwanfalsoi11'),
+(23, 'Tanasha Maria', 'marianasha', 'ilovemusic'),
+(24, 'Syarif Farizi', 'alsyarifalfarizi', 'syarifganteng78'),
+(25, 'Kirana Lisa', 'lisakirana789', 'backtojakarta00');
 
 -- --------------------------------------------------------
 
@@ -82,7 +97,21 @@ INSERT INTO `anggota` (`id_anggota`, `nama_anggota`, `no_tlp`, `alamat`, `userna
 (8, 'Zainal Khalidin', '081221480643', 'Kompleks Bumi Kirana No 3', 'juandaexport', 'itb2020', 'TIDAK AKTIF'),
 (9, 'Dimas Anugrah', '082129908090', 'Kompleks Cibiru Indah No 33', 'batman099', 'batmanvsuperman', 'AKTIF'),
 (10, 'Zabiyan Aqsal', '081228908177', 'Komplek Permata Biru No H3', 'laboratoriumkimia', 'kimiaisfun', 'TIDAK AKTIF'),
-(11, 'Zaidan Anggara', '089789878754', 'Jalan Cibiru Raya No. 14', 'zaidanangga', '123456', 'TIDAK AKTIF');
+(11, 'Zaidan Anggara', '089789878754', 'Jalan Cibiru Raya No. 14', 'zaidanangga', '123456', 'TIDAK AKTIF'),
+(12, 'Syakila Azzahra', '087133878756', 'Komp. Mekar Arum No. 22', 'azzahrasyakila', 'bandung123', 'AKTIF'),
+(13, 'Sindi Aprilianti', '081221887423', 'Jl. Cilengkrang II No. 15', 'apriliasindi', 'mercedezbenz', 'AKTIF'),
+(14, 'Rama Ishaq', '081655211809', 'Jl. Jatihandap A2 No. 29', 'persibjuara', 'persibjuara1933', 'AKTIF'),
+(15, 'Indira Refalleta', '0821778212087', 'Gg. Jibja No. 15', 'irarefalleta', 'jibjaistimewa', 'AKTIF'),
+(16, 'Syahnaz Annisa', '089213877431', 'Komp. Manglayang Regency 14', 'syahnazkila01', 'beautyandbeast', 'TIDAK AKTIF'),
+(17, 'Rara Aprilia', '0821922188278', 'Komp. Antapani Indah C10', 'pagidansore', 'pecintasenja22', 'AKTIF'),
+(18, 'Ibrahim Syukron', '087162461980', 'Jl. Jakarta No. 25', 'pecintagunung56', 'youngsummit2002', 'TIDAK AKTIF'),
+(19, 'Akbar Maulana', '081312876731', 'Komp. Viku A6 No. 5', 'kobar67', 'evilcorps', 'AKTIF'),
+(20, 'Mohammad Reza Faisal', '0851278812397', 'Komp. Bumi Asri No. 41', 'rezafaisal9', 'bumiasrisquad', 'TIDAK AKTIF'),
+(21, 'Tiara Azzahra', '085211321785', 'Jl. Cigagak No.102', 'tiarazahra12', 'tigapagi31', 'AKTIF'),
+(22, 'Muhammad Arif', '085126781912', 'Komp. Pasanggrahan Indah 188', 'naruto12', 'boruto099', 'AKTIF'),
+(23, 'Mutaz Yazid', '082157669012', 'Jl. Cijambe D1 No. 8', 'superutek', 'mayorutek13', 'TIDAK AKTIF'),
+(24, 'Ahmad Zamzam', '085123896576', 'Gg. Karamat No. 2', 'zamzamahmad', 'gitarisidola66', 'TIDAK AKTIF'),
+(25, 'Ismi Hidayat', '082231752198', 'Gg. Sukanegla No. 115', 'suneg12', 'milkblendrafi11', 'AKTIF');
 
 -- --------------------------------------------------------
 
@@ -117,7 +146,21 @@ INSERT INTO `buku` (`id_buku`, `judul_buku`, `penerbit`, `penulis`, `deskripsi`,
 (8, 'Aroma Karsa', 'Bentang Pustaka', 'Dee Lestari', 'Dalam buku ini,terdapat kisah romansa, petualangan, detektif, fantasi, bahkan mitologi', '2018', '2020-07-17', 4, 'ADA'),
 (9, 'Modul Pemrograman Web (HTML,PHP&MySQL/MariaDB)', 'Penerbit Modula', 'Budi Raharjo', 'Buku ini berisikan tentang pemrograman web dari HTML hingga MariaDb', '2016', '2020-08-01', 5, 'ADA'),
 (10, 'Jika Kamu Menjadi Tanda Tambah', 'BIP', 'Trista Speed Shaskan', 'Buku ini mengajarkan konsep penjumlahan dalam matematika kepada anak-anak', '2010', '2020-08-02', 6, 'DIHAPUS'),
-(11, 'Bumi Manusia', 'Lentera Dipantara', 'Pramoedya Ananta Toer', 'Sebuah roman yang dikenal dengan tetralogi buru. Ditulis oleh pram saat di dalam penjara', '2017', '2020-08-07', 1, 'DIHAPUS');
+(11, 'Bumi Manusia', 'Lentera Dipantara', 'Pramoedya Ananta Toer', 'Sebuah roman yang dikenal dengan tetralogi buru. Ditulis oleh pram saat di dalam penjara', '2017', '2020-08-07', 1, 'DIHAPUS'),
+(12, 'Islam dan Akal Merdeka', 'Sega Arsy', 'Mohammad Natsir', 'Buku ini adalah kritik atas pemikiran Soekarno tentang Islam Sontoloyo', '2018', '2020-08-07', 11, 'ADA'),
+(13, 'Mengenal Microsoft Office 2013', 'PT Elex Media Komputindo', 'Taryana Suryana & Koesheryatin', 'Buku ini adalah buku yang berisi tentang-tentang pengenalan microsoft office 2013', '2018', '2020-08-08', 12, 'ADA'),
+(14, 'Guns, Germs, and Steel', 'KPG', 'Jared Diamond', 'Buku tentang sejarah rangkuman riwayat masyarakat manusia di bumi', '2018', '2020-08-09', 13, 'ADA'),
+(15, 'Pemrograman Berorientasi Objek Menggunakan Java', 'Penerbit Informatika', 'Adam Mukharil Bachtiar & Firman Nizammudin Fakhrul', 'Buku ini ditujukan untuk mahasiswa, dosen yang ingin mempelajari pemrograman oop dengan java', '2018', '2020-08-09', 14, 'ADA'),
+(16, 'Pemrograman C dan C++', 'Penerbit Informatika', 'Adam Mukharil Bachtiar', 'Buku ini ditujukan untuk mahasiswa yang ingin mempelajari konsep bahasa C dan C++', '2017', '2020-08-09', 14, 'ADA'),
+(17, 'Matematika Diskrit', 'Penerbit Informatika', 'Rinaldi Munir', 'Buku ini disusun sebagai buku teks mahasiswa yang mengambil mata kuliah Matematika Diskrit', '2016', '2020-08-09', 15, 'DIHAPUS'),
+(18, 'Max Havelaar', 'Penerbit Qanita', 'Max Havelaar', 'Novel ini menceritakan seorang Max Havelaar yang bekerja sebagai Asisten Lebak Banten ', '2018', '2020-08-10', 17, 'ADA'),
+(19, '1984', 'Penerbit Bentang', 'George Orwell', 'Novel ini bercerita tentang seseorang yang hidup dalam negara totalitarianisme', '2018', '2020-08-10', 19, 'ADA'),
+(20, 'Murder On The Orient Express', 'PT Gramedia Pustaka Utama', 'Agatha Christie', 'Novel yang menceritakan tentang penyelidikan pembunuhan di kereta Orient Express ', '2018', '2020-08-10', 19, 'ADA'),
+(21, 'Sjahrir: Peran Besar Bung Kecil', 'KPG', 'Tim Buku Tempo', 'Buku yang menceritakan tentang tokoh pahlawan bangsa bapak bangsa yaitu Sjahrir', '2010', '2020-08-10', 20, 'DIHAPUS'),
+(22, 'Soedirman: Seorang Panglima, Seorang Martir', 'KPG', 'Tim Buku Tempo', 'Buku yang menceritakan tokoh militer atau pejuang kemerdekaan yaitu Soedirman', '2010', '2020-08-10', 21, 'DIHAPUS'),
+(23, 'When Broken Glass Floats', 'PT Elex Media Komputindo', 'Chanrithy Him', 'Buku yang menceritakan perjalanan penulis melewati neraka ladang pembantaian oleh rezim Khmer Merah', '2011', '2020-08-10', 22, 'DIHAPUS'),
+(24, 'Gajah Mada: Sistem Politik dan Kepemimpinan', 'Narasi', 'Enung Nurhayati Ma., Ph.D', 'Buku yang menjelaskan tentang sistem politik dan kepemimpinan Gajah Mada', '2018', '2020-08-10', 23, 'ADA'),
+(25, 'Serat Cantigi', 'MOJOK', 'E. Rokajat Asura', 'Buku yang menceritakan pergulatan seorang anak yang mencari fakta tentang bapaknya', '2018', '2020-08-10', 24, 'ADA');
 
 -- --------------------------------------------------------
 
@@ -153,7 +196,23 @@ INSERT INTO `detail_peminjaman` (`id_peminjaman`, `id_buku`, `tanggal_pinjam`, `
 (13, 4, '2020-08-07', '2020-08-12', 'DIKEMBALIKAN'),
 (14, 9, '2020-08-07', '2020-08-12', 'DIPINJAM'),
 (15, 8, '2020-08-07', '2020-08-12', 'DIPINJAM'),
-(16, 3, '2020-08-07', '2020-08-12', 'DIPINJAM');
+(16, 3, '2020-08-07', '2020-08-12', 'DIPINJAM'),
+(17, 18, '2020-08-05', '2020-08-10', 'DIPINJAM'),
+(18, 14, '2020-08-06', '2020-08-11', 'DIPINJAM'),
+(18, 19, '2020-08-06', '2020-08-11', 'DIPINJAM'),
+(19, 24, '2020-08-06', '2020-08-11', 'DIPINJAM'),
+(20, 15, '2020-08-07', '2020-08-12', 'DIPINJAM'),
+(21, 12, '2020-08-07', '2020-08-12', 'DIPINJAM'),
+(22, 16, '2020-08-08', '2020-08-13', 'DIPINJAM'),
+(23, 20, '2020-08-08', '2020-08-13', 'DIPINJAM'),
+(24, 24, '2020-08-08', '2020-08-13', 'DIKEMBALIKAN'),
+(25, 15, '2020-08-08', '2020-08-13', 'DIPINJAM'),
+(25, 25, '2020-08-09', '2020-08-14', 'DIPINJAM'),
+(26, 12, '2020-08-09', '2020-08-14', 'DIKEMBALIKAN'),
+(27, 13, '2020-08-09', '2020-08-14', 'ADA'),
+(28, 17, '2020-08-09', '2020-08-14', 'DIPINJAM'),
+(29, 20, '2020-08-10', '2020-08-15', 'DIPINJAM'),
+(30, 14, '2020-08-10', '2020-08-15', 'DIPINJAM');
 
 -- --------------------------------------------------------
 
@@ -186,7 +245,21 @@ INSERT INTO `peminjaman` (`id_peminjaman`, `id_anggota`) VALUES
 (9, 8),
 (10, 9),
 (11, 10),
-(12, 10);
+(12, 10),
+(17, 12),
+(18, 12),
+(19, 13),
+(20, 14),
+(21, 15),
+(23, 17),
+(25, 17),
+(30, 18),
+(22, 19),
+(26, 19),
+(27, 21),
+(28, 22),
+(29, 24),
+(24, 25);
 
 --
 -- Indexes for dumped tables
@@ -233,25 +306,25 @@ ALTER TABLE `peminjaman`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `anggota`
 --
 ALTER TABLE `anggota`
-  MODIFY `id_anggota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_anggota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `buku`
 --
 ALTER TABLE `buku`
-  MODIFY `id_buku` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_buku` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `peminjaman`
 --
 ALTER TABLE `peminjaman`
-  MODIFY `id_peminjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_peminjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- Constraints for dumped tables

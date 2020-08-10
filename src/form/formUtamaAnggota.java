@@ -25,7 +25,7 @@ public class formUtamaAnggota extends javax.swing.JFrame {
         
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
-        txtGreet.setText("SELAMAT DATANG, " + formLoginAnggota.getNama());
+        lblGreet.setText("SELAMAT DATANG, " + formLoginAnggota.getNama());
     }
     
     // Method untuk logout
@@ -59,7 +59,7 @@ public class formUtamaAnggota extends javax.swing.JFrame {
         myProfile.setVisible(true);
         
         // Menambahkan kembali komponen yang ada di panel utama
-        panelUtama.add(txtGreet);
+        panelUtama.add(lblGreet);
         panelUtama.add(btnProfile);
         panelUtama.add(btnKoleksiBuku);
         panelUtama.add(btnPinjamBuku);
@@ -89,7 +89,7 @@ public class formUtamaAnggota extends javax.swing.JFrame {
         koleksiBuku.setVisible(true);
         
         // Menambahkan kembali komponen yang ada di panel utama
-        panelUtama.add(txtGreet);
+        panelUtama.add(lblGreet);
         panelUtama.add(btnProfile);
         panelUtama.add(btnKoleksiBuku);
         panelUtama.add(btnPinjamBuku);
@@ -119,7 +119,7 @@ public class formUtamaAnggota extends javax.swing.JFrame {
         pinjamBuku.setVisible(true);
         
         // Menambahkan kembali komponen yang ada di panel utama
-        panelUtama.add(txtGreet);
+        panelUtama.add(lblGreet);
         panelUtama.add(btnProfile);
         panelUtama.add(btnKoleksiBuku);
         panelUtama.add(btnPinjamBuku);
@@ -149,7 +149,7 @@ public class formUtamaAnggota extends javax.swing.JFrame {
         historiPeminjaman.setVisible(true);
         
         // Menambahkan kembali komponen yang ada di panel utama
-        panelUtama.add(txtGreet);
+        panelUtama.add(lblGreet);
         panelUtama.add(btnProfile);
         panelUtama.add(btnKoleksiBuku);
         panelUtama.add(btnPinjamBuku);
@@ -179,7 +179,7 @@ public class formUtamaAnggota extends javax.swing.JFrame {
         pinjamanSaya.setVisible(true);
         
         // Menambahkan kembali komponen yang ada di panel utama
-        panelUtama.add(txtGreet);
+        panelUtama.add(lblGreet);
         panelUtama.add(btnProfile);
         panelUtama.add(btnKoleksiBuku);
         panelUtama.add(btnPinjamBuku);
@@ -204,8 +204,8 @@ public class formUtamaAnggota extends javax.swing.JFrame {
         btnDaftarPinjaman = new javax.swing.JButton();
         btnHistoriPinjam = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
-        txtGreet = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        lblGreet = new javax.swing.JLabel();
+        menuBar = new javax.swing.JMenuBar();
         menuAkun = new javax.swing.JMenu();
         menuProfile = new javax.swing.JMenuItem();
         menuLogout = new javax.swing.JMenuItem();
@@ -276,10 +276,10 @@ public class formUtamaAnggota extends javax.swing.JFrame {
             }
         });
 
-        txtGreet.setFont(new java.awt.Font("American Captain", 0, 48)); // NOI18N
-        txtGreet.setForeground(new java.awt.Color(255, 255, 255));
-        txtGreet.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtGreet.setPreferredSize(new java.awt.Dimension(1366, 15));
+        lblGreet.setFont(new java.awt.Font("American Captain", 0, 48)); // NOI18N
+        lblGreet.setForeground(new java.awt.Color(255, 255, 255));
+        lblGreet.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblGreet.setPreferredSize(new java.awt.Dimension(1366, 15));
 
         panelUtama.setLayer(btnProfile, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panelUtama.setLayer(btnKoleksiBuku, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -287,7 +287,7 @@ public class formUtamaAnggota extends javax.swing.JFrame {
         panelUtama.setLayer(btnDaftarPinjaman, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panelUtama.setLayer(btnHistoriPinjam, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panelUtama.setLayer(btnLogout, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        panelUtama.setLayer(txtGreet, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panelUtama.setLayer(lblGreet, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout panelUtamaLayout = new javax.swing.GroupLayout(panelUtama);
         panelUtama.setLayout(panelUtamaLayout);
@@ -295,7 +295,7 @@ public class formUtamaAnggota extends javax.swing.JFrame {
             panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelUtamaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtGreet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lblGreet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(panelUtamaLayout.createSequentialGroup()
                 .addGap(310, 310, 310)
                 .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -312,7 +312,7 @@ public class formUtamaAnggota extends javax.swing.JFrame {
             panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelUtamaLayout.createSequentialGroup()
                 .addGap(39, 39, 39)
-                .addComponent(txtGreet, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblGreet, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnKoleksiBuku, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -346,7 +346,7 @@ public class formUtamaAnggota extends javax.swing.JFrame {
         });
         menuAkun.add(menuLogout);
 
-        jMenuBar1.add(menuAkun);
+        menuBar.add(menuAkun);
 
         menuData.setText("Data");
 
@@ -376,7 +376,7 @@ public class formUtamaAnggota extends javax.swing.JFrame {
         });
         menuData.add(formHistoriPeminjaman);
 
-        jMenuBar1.add(menuData);
+        menuBar.add(menuData);
 
         menuPinjamBuku.setText("Pinjam");
         menuPinjamBuku.addActionListener(new java.awt.event.ActionListener() {
@@ -393,9 +393,9 @@ public class formUtamaAnggota extends javax.swing.JFrame {
         });
         menuPinjamBuku.add(formPinjamBuku);
 
-        jMenuBar1.add(menuPinjamBuku);
+        menuBar.add(menuPinjamBuku);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -511,16 +511,16 @@ public class formUtamaAnggota extends javax.swing.JFrame {
     private javax.swing.JMenuItem formHistoriPeminjaman;
     private javax.swing.JMenuItem formPeminjaman;
     private javax.swing.JMenuItem formPinjamBuku;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JLabel lblGreet;
     private javax.swing.JMenu menuAkun;
+    private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu menuData;
     private javax.swing.JMenuItem menuKoleksiBuku;
     private javax.swing.JMenuItem menuLogout;
     private javax.swing.JMenu menuPinjamBuku;
     private javax.swing.JMenuItem menuProfile;
     private javax.swing.JDesktopPane panelUtama;
-    private javax.swing.JLabel txtGreet;
     // End of variables declaration//GEN-END:variables
 }

@@ -193,24 +193,24 @@ public class formHistoriPeminjaman extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        lblTitle = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblHistoriPeminjaman = new javax.swing.JTable();
         btnSemua = new javax.swing.JButton();
         btnDipinjam = new javax.swing.JButton();
         btnDikembalikan = new javax.swing.JButton();
+        btnPrintHistori = new javax.swing.JButton();
         txtCariBuku = new javax.swing.JTextField();
         btnCari = new javax.swing.JButton();
         btnKembali = new javax.swing.JButton();
-        btnPrintHistori = new javax.swing.JButton();
 
         setOpaque(false);
         setPreferredSize(new java.awt.Dimension(1366, 632));
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("HISTORI PEMINJAMAN BUKU");
-        jLabel1.setPreferredSize(new java.awt.Dimension(1322, 43));
+        lblTitle.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitle.setText("HISTORI PEMINJAMAN BUKU");
+        lblTitle.setPreferredSize(new java.awt.Dimension(1322, 43));
 
         tblHistoriPeminjaman.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -246,6 +246,13 @@ public class formHistoriPeminjaman extends javax.swing.JInternalFrame {
             }
         });
 
+        btnPrintHistori.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/print.png"))); // NOI18N
+        btnPrintHistori.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrintHistoriActionPerformed(evt);
+            }
+        });
+
         txtCariBuku.setText("Cari nama buku disini");
         txtCariBuku.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -264,13 +271,6 @@ public class formHistoriPeminjaman extends javax.swing.JInternalFrame {
         btnKembali.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKembaliActionPerformed(evt);
-            }
-        });
-
-        btnPrintHistori.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/print.png"))); // NOI18N
-        btnPrintHistori.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPrintHistoriActionPerformed(evt);
             }
         });
 
@@ -300,7 +300,7 @@ public class formHistoriPeminjaman extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(btnKembali, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1311, Short.MAX_VALUE)
+                .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 1311, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -312,7 +312,7 @@ public class formHistoriPeminjaman extends javax.swing.JInternalFrame {
                         .addComponent(btnKembali, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(38, 38, 38)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnCari, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -393,8 +393,8 @@ public class formHistoriPeminjaman extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnKembali;
     private javax.swing.JButton btnPrintHistori;
     private javax.swing.JButton btnSemua;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblTitle;
     private javax.swing.JTable tblHistoriPeminjaman;
     private javax.swing.JTextField txtCariBuku;
     // End of variables declaration//GEN-END:variables
