@@ -5,7 +5,6 @@
  */
 package perpustakaan;
 
-import com.mysql.jdbc.CommunicationsException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import javax.swing.JOptionPane;

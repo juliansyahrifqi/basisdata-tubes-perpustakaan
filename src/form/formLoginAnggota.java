@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package form;
 
 import java.sql.Connection;
@@ -22,6 +17,7 @@ public class formLoginAnggota extends javax.swing.JFrame {
     static int idAnggota;
     static String namaAnggota;
     static String status;
+    
     /**
      * Creates new form formLoginAnggota
      */
@@ -31,6 +27,7 @@ public class formLoginAnggota extends javax.swing.JFrame {
         txtUsername.requestFocus();
     }
     
+    // Method untuk melakukan login
     public void do_login() {
         
         // Koneksi ke database
@@ -78,10 +75,12 @@ public class formLoginAnggota extends javax.swing.JFrame {
         }
     }
     
-   public static int getId() {
+    // Method untuk mendapatkan id anggota yang login ( session )
+    public static int getId() {
         return idAnggota;
     }
     
+    // Method untuk mendapatkan nama anggota yang login 
     public static String getNama() {
         return namaAnggota;
     }
