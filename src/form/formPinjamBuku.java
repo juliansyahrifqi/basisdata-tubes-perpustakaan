@@ -291,6 +291,39 @@ public class formPinjamBuku extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }
+    
+    private boolean cek_peminjaman() {
+        
+        boolean cek = false;
+        // Membuat koneksi ke database
+        Connection kon = Koneksi.koneksiDB();
+        
+        try {
+            // Mempersiapkan statement
+            Statement stmt = kon.createStatement();
+            
+            // Query sql
+            String sql = "SELECT id_buku, peminjaman.id_anggota "
+                    + "FROM detail_peminjaman "
+                    + "INNER JOIN peminjaman ON peminjaman.id_peminjaman = detail_peminjaman.id_peminjaman"
+                    + " WHERE id_anggota = '"+formLoginAnggota.getId()+"'"
+                    + "AND id_buku = '"+txtIdBuku.getText()+"'  AND status = 'DIPINJAM'";
+                 
+            // Eksekusi query
+            ResultSet rs = stmt.executeQuery(sql);
+            
+            // Jika data ada
+            if(rs.next()) {
+                cek = true;
+            }
+            
+        }catch(Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        
+        return cek;
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -535,12 +568,16 @@ public class formPinjamBuku extends javax.swing.JInternalFrame {
     private void btnPinjamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPinjamActionPerformed
         
         // Konfirmasi pinjam buku
-        int pinjam = JOptionPane.showOptionDialog(this, 
+        if(cek_peminjaman()) {
+            JOptionPane.showMessageDialog(null, "Buku yang dipilih sudah dipinjam!");
+        } else {
+            int pinjam = JOptionPane.showOptionDialog(this, 
                 "Anda yakin pinjam buku ini?", null, JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE, null, null, null);
         
-        if(pinjam == JOptionPane.YES_OPTION) {
-            pinjam_buku(); 
+            if(pinjam == JOptionPane.YES_OPTION) {
+                pinjam_buku(); 
+            }
         }
         
     }//GEN-LAST:event_btnPinjamActionPerformed

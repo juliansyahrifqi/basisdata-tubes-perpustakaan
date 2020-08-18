@@ -391,15 +391,21 @@ public class formKelolaAnggota extends javax.swing.JInternalFrame {
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
         // Konfirmasi hapus
+        int baris = tblAnggota.getSelectedRow();
+        String status = tblAnggota.getValueAt(baris, 5).toString();
         
-        int hapus = JOptionPane.showOptionDialog(this, 
+        if(status.equals("TIDAK AKTIF")) {
+            JOptionPane.showMessageDialog(null, "Anggota sudah tidak aktif! Tidak bisa dihapus!");
+        } else {
+            int hapus = JOptionPane.showOptionDialog(this, 
                 "Apakah anda yakin untuk menghapus data ini ?", null, JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE, null, null, null);
         
-        if(hapus == JOptionPane.YES_OPTION) {
-            hapus_data();
-            load_data_anggota();
-            btnHapus.setEnabled(false);
+            if(hapus == JOptionPane.YES_OPTION) {
+                hapus_data();
+                load_data_anggota();
+                btnHapus.setEnabled(false);
+            }   
         }
     }//GEN-LAST:event_btnHapusActionPerformed
 

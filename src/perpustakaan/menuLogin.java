@@ -4,6 +4,11 @@ import form.formDaftarAnggota;
 import form.formLoginAdmin;
 import form.formLoginAnggota;
 import java.awt.Component;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -13,6 +18,12 @@ import javax.swing.UIManager;
  * @author oyeaaa
  */
 public class menuLogin extends javax.swing.JFrame {
+    
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    Date date = new Date();
+
+    // Mendapatkan tanggal sekarang
+    String tanggalSekarang = dateFormat.format(date);
 
     public static class customUI extends Component {
         
@@ -26,6 +37,69 @@ public class menuLogin extends javax.swing.JFrame {
      */
     public menuLogin() {
         initComponents();
+        
+        // Jika status peminjaman masih dipinjam pada tanggal hari ini
+        if(cek_status_peminjaman().equals("DIPINJAM")) {
+            kembalikan_otomatis();
+        }
+    }
+    
+    // Method kembalikan buku otomatis
+    private void kembalikan_otomatis() {
+
+        // Koneksi ke database
+        Connection kon = Koneksi.koneksiDB();
+        
+        try {
+            
+            // Mempersiapkan statement
+            Statement stmt = kon.createStatement();
+            
+            // Query sql
+            String sql = "UPDATE detail_peminjaman SET status = 'DIKEMBALIKAN'"
+                    + "WHERE tanggal_kembali = '"+tanggalSekarang+"'";
+            
+            // Query sql2
+            String sql2 = "UPDATE buku SET stok = stok + 1 "
+                    + "WHERE id_buku IN ( SELECT id_buku FROM detail_peminjaman "
+                    + "WHERE tanggal_kembali = '"+tanggalSekarang+"')";
+            
+            // Eksekusi query
+            int baris = stmt.executeUpdate(sql);
+            int baris2 = stmt.executeUpdate(sql2);
+             
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    
+    // Method untuk mengecek status peminjaman buku
+    private String cek_status_peminjaman() {
+        
+        // Koneksi ke database
+        Connection kon = Koneksi.koneksiDB();
+        
+        String status = "";
+        try {
+            
+            // Mempersiapkan statement
+            Statement stmt = kon.createStatement();
+            
+            // Query sql
+            String sql = "SELECT status FROM detail_peminjaman WHERE tanggal_kembali = '"+tanggalSekarang+"'";
+            
+            // Eksekusi query sql
+            ResultSet rs = stmt.executeQuery(sql);
+            
+            // Mendapatkan data dari hasil query
+            while(rs.next()) {
+                status = rs.getString(1);
+            }
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        
+        return status;
     }
 
     /**

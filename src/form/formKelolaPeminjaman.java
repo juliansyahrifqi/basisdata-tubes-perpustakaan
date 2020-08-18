@@ -413,7 +413,14 @@ public class formKelolaPeminjaman extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblKelolaPeminjamanMouseClicked
 
     private void btnKembalikanBukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembalikanBukuActionPerformed
-        kembalikan_buku();
+        String status = tblKelolaPeminjaman.getValueAt(tblKelolaPeminjaman.getSelectedRow(), 6).toString();
+            
+        System.out.println(status);
+        if(status.equals("DIKEMBALIKAN")) {
+            JOptionPane.showMessageDialog(null, "Buku sudah dikembalikan sebelumnya!");
+        } else {
+             kembalikan_buku();
+        }
     }//GEN-LAST:event_btnKembalikanBukuActionPerformed
 
     private void btnKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembaliActionPerformed

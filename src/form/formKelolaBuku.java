@@ -738,12 +738,17 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblBukuMouseClicked
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        // Jika field sudah disii semua
+        String status = tblBuku.getValueAt(tblBuku.getSelectedRow(), 8).toString();
+        
         if(cek_validasi()) {
-            edit_buku();
-            load_data_buku();
-            clear_data();
-        }
+            if(status.equals("DIHAPUS")) {
+                JOptionPane.showMessageDialog(null, "Buku sudah dihapus sebelumnya! Tidak bisa diedit!");
+            } else {
+                edit_buku();
+                load_data_buku();
+                clear_data();
+            } 
+        } 
         
         // Tombol tambah dinyalakan
         btnTambah.setEnabled(true);
@@ -753,19 +758,27 @@ public class formKelolaBuku extends javax.swing.JInternalFrame {
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
         
-        // Konfirmasi hapus
-        int hapus = JOptionPane.showOptionDialog(this, 
+        // Get status
+        String status = tblBuku.getValueAt(tblBuku.getSelectedRow(), 8).toString();
+        
+        // Jika buku sudah dihapus
+        if(status.equals("DIHAPUS")) {
+            JOptionPane.showMessageDialog(null, "Buku anda sudah dihapus sebelumnya");
+        } else {
+            // Konfirmasi hapus
+            int hapus = JOptionPane.showOptionDialog(this, 
                 "Apakah anda yakin untuk menghapus data ini ?", null, JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE, null, null, null);
         
-        if(hapus == JOptionPane.YES_OPTION) {
-            if(cek_validasi()) {
-                hapus_buku();
-                load_data_buku();
-                clear_data();
-                btnHapus.setEnabled(false);
+            if(hapus == JOptionPane.YES_OPTION) {
+                if(cek_validasi()) {
+                    hapus_buku();
+                    load_data_buku();
+                    clear_data();
+                    btnHapus.setEnabled(false);
+                }
             }
-        }
+        }                   
     }//GEN-LAST:event_btnHapusActionPerformed
 
     private void txtCariMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCariMouseClicked
